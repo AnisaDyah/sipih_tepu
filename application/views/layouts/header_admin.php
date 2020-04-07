@@ -104,7 +104,7 @@ if($this->session->status !== ('Logged'))
                   </li> -->
                   <li>
                   
-                    <a href="<?php echo base_url('admin/transaksi')?>">
+                    <a href="<?php echo base_url('peramalan/')?>">
                     <i class="fa fa-search"></i>Proyeksi Harga</a>
                   </li>
                 </ul>

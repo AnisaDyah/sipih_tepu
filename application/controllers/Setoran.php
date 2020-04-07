@@ -178,7 +178,7 @@ class Setoran extends CI_Controller {
             redirect('setoran/setoran_user','refresh');
         }
 
-
+    
 }
 
 /* End of file setoran.php */
