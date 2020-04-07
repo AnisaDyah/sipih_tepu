@@ -74,9 +74,31 @@ class Peramalan extends CI_Controller {
 
             $nki=array();
             $jki=array();
-            $jki=$dmin-$d1;
+            $a=array();
+            $b=array();
+            $nt=array();
+            $nki=$dmin-$d1;
+
+            for($i = 0; $i <=$k-1; $i++){
+                  if($i==0){
+                      $nki=$dmin-$d1;
+                  }else{
+                $nki= $nki + $l ;
+            }
+                for($j = 0; $j <=$k-1; $j++){ 
+                
+                    $jki= $nki+$l;
+                }
+                $nt[]=($jki+$nki)/2;
+            }
+                  
             $data['nki']=$nki;
             $data['jki']=$jki;
+
+            //membuat nilai tengah
+            
+        
+            $data['nt']=$nt;
             $this->load->view('peramalan/ramal2',$data);
     
         }

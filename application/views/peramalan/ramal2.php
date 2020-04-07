@@ -101,20 +101,45 @@
                 <td>
                 U<?php echo $i+1;?>
                 </td>
-                <?php 
-                  if($i==0){
-                      $nki=$dmin-$d1;
-                  }else{
-                $nki= $nki + $l ;
-                  }?>
-                <td><?php echo $nki; ?> - 
+                <?php
+                 if($i==0){
+                    $nki=$dmin-$d1;
+                }else{
+              $nki= $nki + $l ;
+                  $a[]=$nki;
+          }?>
+                <td><?php echo $nki ?> - 
                 
-                <?php  for($j = 0; $j <=$k-1; $j++){ 
-                
-                    $jki= $nki+$l;}
-            ?>
+                <?php for($j = 0; $j <=$k-1; $j++){ 
+                    $jki= $nki+$l;
+                }?>
+
            <?php echo $jki ; ?></td> 
            
+                </tr>
+                <?php  } ?>
+              
+              </tbody>
+            </table>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;">Nilai Tengah</th>
+                </tr>
+                <tr>
+                  <th>Nilai Tengah</th>
+                  <th>Nilai</th>
+                
+                </tr>
+              </thead>
+              <tbody>
+              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
+                <?php for($i = 0; $i <=$k-1; $i++){ ?>
+                <tr>
+                <td>
+                A<?php echo $i+1;?>
+                </td>
+                <td><?php echo $nt[$i] ?></td>
                 </tr>
                 <?php  } ?>
               
