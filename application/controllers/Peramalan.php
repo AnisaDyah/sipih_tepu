@@ -30,16 +30,16 @@ class Peramalan extends CI_Controller {
         $harga=array();
         
         //mengambil data yang akan diramal
-            $data_jual = $this->Peramalan_model->get_tgl($id_user, $tgl_awal, $tgl_akhir);
+            $data_setor = $this->Peramalan_model->get_tgl($id_user, $tgl_awal, $tgl_akhir);
             
-            foreach($data_jual as $key){
+            foreach($data_setor as $key){
                 $harga[] = $key->harga;
             }
         //mencari nilai dmin dan d max
             $dmax=max($harga);
             $dmin=min($harga);
 
-			$data['data_jual'] = $data_jual;
+			$data['data_setor'] = $data_setor;
             $data['dmax']=$dmax;
             $data['dmin']=$dmin;
 
@@ -63,7 +63,7 @@ class Peramalan extends CI_Controller {
             $data['d2']=$d2;
 
             //jumlah interval kelas
-            $k = round(1 + (3.322 * LOG10(count($data_jual))));
+            $k = round(1 + (3.322 * LOG10(count($data_setor))));
             $data['k']=$k;
 
             //panjang interval kelas
@@ -77,13 +77,18 @@ class Peramalan extends CI_Controller {
             $a=array();
             $b=array();
             $nt=array();
-            $nki=$dmin-$d1;
+            $interval=array();
+            $Fz=array();
+            $U=0;
+           
+            
 
-            for($i = 0; $i <=$k-1; $i++){
+            for($i = 0; $i <=$k; $i++){
                   if($i==0){
                       $nki=$dmin-$d1;
                   }else{
                 $nki= $nki + $l ;
+                $interval[]=$nki;
             }
                 for($j = 0; $j <=$k-1; $j++){ 
                 
@@ -96,9 +101,23 @@ class Peramalan extends CI_Controller {
             $data['jki']=$jki;
 
             //membuat nilai tengah
-            
-        
             $data['nt']=$nt;
+
+            //Fuzzyfikasi
+            for($i= 0; $i<count($data_setor); $i++){
+                for($j= 0; $j<=$k-1; $j++){
+                    if($harga[$i] > $interval[$j]){
+                        if($harga[$i] < $interval[$j+1]){
+                            $U= $j+1;
+                        }
+                }
+                
+                }
+                $Fz[]=$U+1;
+            }
+            
+            $data['Fz']=$Fz;
+            $data['harga']=$harga;
             $this->load->view('peramalan/ramal2',$data);
     
         }

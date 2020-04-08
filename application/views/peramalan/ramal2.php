@@ -37,7 +37,7 @@
               </thead>
               <tbody>
               <?php //for($i = 0; $i < count($year_month); $i++){ ?>
-                <?php foreach($data_jual as $row){ ?>
+                <?php foreach($data_setor as $row){ ?>
                 <tr>
                   <td><?php echo $row->tgl_setoran ?></td>
                   <td><?php echo $row->harga ?></td>
@@ -47,38 +47,38 @@
               </tbody>
             </table>
             <br>
-            <table class="table table-bordered table-striped">
+            <table  class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;">Menentukan Dasar Perhitungan untuk Kelas Interval</th>
+                  <th colspan="2" style="text-align: center;">Menentukan Dasar Perhitungan untuk Kelas Interval</th>
                 </tr>
                 <tr>
-                  <th>DMIN</th>
-                  <th><?php echo $dmin; ?></th>
+                  <th width=20px>DMIN</th>
+                  <th width=10px><?php echo $dmin; ?></th>
                 </tr>
                 <tr>
-                  <th>DMAX</th>
-                  <th><?php echo $dmax; ?></th>
+                  <th width=20px>DMAX</th>
+                  <th width=10px><?php echo $dmax; ?></th>
                 </tr>
                 <tr>
-                  <th>D1</th>
-                  <th><?php echo $d1; ?></th>
+                  <th width=20px>D1</th>
+                  <th width=10px><?php echo $d1; ?></th>
                 </tr>
                 <tr>
-                  <th>D2</th>
-                  <th><?php echo $d2; ?></th>
+                  <th width=20px>D2</th>
+                  <th width=10px><?php echo $d2; ?></th>
                 </tr>
                 <tr>
-                  <th>Himpunan Semesta</th>
-                  <th>[<?php echo $dmin-$d1; ?>,<?php echo $dmax+$d2; ?>]</th>
+                  <th width=20px>Himpunan Semesta</th>
+                  <th width=10px>[<?php echo $dmin-$d1; ?>,<?php echo $dmax+$d2; ?>]</th>
                 </tr>
                 <tr>
-                  <th>Jumlah Interval kelas</th>
-                  <th><?php echo $k; ?></th>
+                  <th width=20px>Jumlah Interval kelas</th>
+                  <th width=10px><?php echo $k; ?></th>
                 </tr>
                 <tr>
-                  <th>Panjang Interval kelas</th>
-                  <th><?php echo $l; ?></th>
+                  <th width=20px>Panjang Interval kelas</th>
+                  <th width=10px><?php echo $l; ?></th>
                 </tr>
               </thead>
             </table>
@@ -106,7 +106,7 @@
                     $nki=$dmin-$d1;
                 }else{
               $nki= $nki + $l ;
-                  $a[]=$nki;
+                  
           }?>
                 <td><?php echo $nki ?> - 
                 
@@ -145,7 +145,64 @@
               
               </tbody>
             </table>
-          
+            <br>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;">Fuzzyfikasi</th>
+                </tr>
+                <tr>
+                  <th>State ke-</th>
+                  <th>Data</th>
+                  <th>Interval</th>
+                  <th>Fuzzyfikasi</th>
+                
+                </tr>
+              </thead>
+              <tbody>
+              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
+                <?php for($i = 0; $i <count($data_setor); $i++){ ?>
+                <tr>
+                <td><?php echo $i+1;?></td>
+                <td><?php echo $harga[$i];?></td>
+                <td>U<?php echo $Fz[$i] ?></td>
+                <td>A<?php echo $Fz[$i] ?></td>
+                </tr>
+                <?php  } ?>
+              
+              </tbody>
+            </table>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;">Fuzzy Logical Relationship</th>
+                </tr>
+                <tr>
+                  <th colspan="2" style="text-align: center;">urutan data</th>
+                  <th colspan="2" style="text-align: center;">Fuzzy Logical Relationship</th>
+                
+                </tr>
+                <tr>
+                <th>Current State</th>
+                <th>Next State</th>
+                <th>Current State</th>
+                <th>Next State</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
+                <?php for($i = 0; $i <count($data_setor)-1; $i++){ ?>
+                <tr>
+                <td><?php echo $i+1;?></td>
+                <td><?php echo $i+2;?></td>
+                <td><?php echo "wait" ?></td>
+                <td><?php echo "wait" ?></td>
+                </tr>
+                <?php  } ?>
+              
+              </tbody>
+            </table>
+            
            
             <div class="box-body chart-responsive">
               <div class="chart" id="line-chart" style="height: 300px;"></div>
