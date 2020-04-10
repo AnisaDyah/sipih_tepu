@@ -110,14 +110,61 @@ class Peramalan extends CI_Controller {
                         if($harga[$i] < $interval[$j+1]){
                             $U= $j+1;
                         }
-                }
-                
+                    }
                 }
                 $Fz[]=$U+1;
             }
             
             $data['Fz']=$Fz;
             $data['harga']=$harga;
+
+            //FLR dan FLRG
+            
+            $state1=array();
+            $state2=array();
+            $flrg=array();
+            $cek=array();
+            $raw=array();
+            $col=array();
+
+            for($i= 0; $i<count($data_setor)-1; $i++){
+                $state1[]=$Fz[$i];
+                $state2[]=$Fz[$i+1];
+                for($j= 1; $j<=$k; $j++){
+                    for($m= 1; $m<=$k; $m++){
+                        
+                       if($state1[$i] == $j){
+                           if($state2[$i] == $m){
+                               $flrg[$j][$m]=$flrg[$j][$m]+1;
+                               //$col[]=$flrg[$j][$m-1];
+                           }
+                           
+                        }
+                        else if($flrg[$j][$m] ==null){
+                            $flrg[$j][$m]=0;
+                        }  
+                        
+                        $raw[$j]=array_sum($flrg[$j]); 
+                        $mat[$j][$m]=$flrg[$j][$m]/$raw[$j]; 
+                        if(is_NAN($mat[$j][$m])){
+                            $mat[$j][$m]= 0 ;
+                        }
+                    }
+                    
+                    
+                    
+                  
+                }
+            }
+            
+            $col=array_reduce($flrg, 'array_merge', array());
+            $trik=array_reduce($mat, 'array_merge', array());
+            //echo var_dump($cok);
+            $data['state1']=$state1;
+            $data['state2']=$state2;
+            $data['flrg']=$flrg;
+            $data['col']=$col;
+            $data['trik']=$trik;
             $this->load->view('peramalan/ramal2',$data);
     
         }

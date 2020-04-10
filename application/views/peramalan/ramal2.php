@@ -195,15 +195,102 @@
                 <tr>
                 <td><?php echo $i+1;?></td>
                 <td><?php echo $i+2;?></td>
-                <td><?php echo "wait" ?></td>
-                <td><?php echo "wait" ?></td>
+                <td>A<?php echo $state1[$i] ?></td>
+                <td>A<?php echo $state2[$i] ?></td>
                 </tr>
                 <?php  } ?>
               
               </tbody>
             </table>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;">Fuzzy Logical Relationship Group</th>
+                </tr>
+                <tr>
+                  <th>Current State -> Next State</th>
+                  <th>Jumlah</th>
+                
+                </tr>
+              </thead>
+              <tbody>
+              <?php for($j = 1; $j <=$k; $j++){
+                for($m = 1; $m <=$k; $m++){ 
+                ?>
+                <tr>
+                <td>
+                <?php echo "A".$j." ke A".$m ;?>
+                </td>
+                <td><?php echo $flrg[$j][$m] ?></td>
+                </tr>
+                <?php  } 
+                }?>
+                
+              
+              </tbody>
+            </table>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;">Matrik probabilitas Markov Chain</th>
+                </tr>
+               
+                <tr>
+                <th rowspan="2"></th>
+                    <?php
+                    $kolom = $j; 
+                    $i=1;    
+                    for($j = 1; $j <=$k; $j++){
+                      if(($i) % $kolom== 1) {    
+                      echo'<tr>';   
+                      }  
+                      echo '<th align="center" width="300px"><b>A'.$j.'</b></th>';
+                      if(($i) % $kolom== 0) {    
+                      echo'</tr>';    
+                      }
+                    $i++;
+                    }
+                    ?>
+                </tr>
+                <tr>
+                <?php for($m = 1; $m <=$k; $m++){?>
+                <th > <?php echo "asd".$m ;?></th>
+                </tr>
+                <?php } ?>
+                <tr>
+                <!-- //<th rowspan="2" ><th> -->
+                <?php
+                    $kolom = $j-1; 
+                    $i=1;    
+                    for($j = 0; $j <$k*$k; $j++){
+                      //for($j = 1; $j <=$k; $j++){
+                      if(($i) % $kolom== 1) {    
+                      echo'<tr>';   
+                      }  
+                      echo '<th ralign="center" width="300px"><b>'.$trik[$j].'</b></th>';
+                      if(($i) % $kolom== 0) {    
+                      echo'</tr>';    
+                      }
+                    $i++;
+                    }
+                    ?>
+                    </tr>
+                     
+               
+               
+              </thead>
+              <tbody>
+              
+              </tbody>
+            </table>
+            <!-- <?php for($j = 1; $j <=$k ; $j++){
+                for($m = 1 ;$m <=$k; $m++){ 
+                ?>
             
-           
+            <h1><?php echo $flrg[$j][$m];?> </h1>
+            <h1></h1>
+            <?php  } 
+            }?> -->
             <div class="box-body chart-responsive">
               <div class="chart" id="line-chart" style="height: 300px;"></div>
             </div>
