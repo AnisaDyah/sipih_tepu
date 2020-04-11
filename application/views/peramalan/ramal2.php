@@ -14,7 +14,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pilih bulan yang akan diramal</h2>
+                    <h2>Rincian Perhitungan dengan Metode Fuzzy Time Series Markov Chain</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -27,7 +27,7 @@
           <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;">Data yang Dijadikan Acuan Peramalan</th>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Data yang Dijadikan Acuan Peramalan</th>
                 </tr>
                 <tr>
                   <th>Bulan</th>
@@ -46,11 +46,11 @@
               <?php } ?>
               </tbody>
             </table>
-            <br>
+           
             <table  class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="2" style="text-align: center;">Menentukan Dasar Perhitungan untuk Kelas Interval</th>
+                  <th colspan="2" style="text-align: center;" bgcolor="#90EE90">Menentukan Dasar Perhitungan untuk Kelas Interval</th>
                 </tr>
                 <tr>
                   <th width=20px>DMIN</th>
@@ -82,11 +82,11 @@
                 </tr>
               </thead>
             </table>
-            <br>
+           
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;">Kelas Interval</th>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Kelas Interval</th>
                 </tr>
                 <tr>
                   <th>Kelas Interval</th>
@@ -95,7 +95,7 @@
                 </tr>
               </thead>
               <tbody>
-              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
+              
                 <?php for($i = 0; $i <=$k-1; $i++){ ?>
                 <tr>
                 <td>
@@ -124,7 +124,7 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;">Nilai Tengah</th>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Nilai Tengah</th>
                 </tr>
                 <tr>
                   <th>Nilai Tengah</th>
@@ -145,11 +145,11 @@
               
               </tbody>
             </table>
-            <br>
+           
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;">Fuzzyfikasi</th>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzyfikasi</th>
                 </tr>
                 <tr>
                   <th>State ke-</th>
@@ -175,7 +175,7 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;">Fuzzy Logical Relationship</th>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzy Logical Relationship</th>
                 </tr>
                 <tr>
                   <th colspan="2" style="text-align: center;">urutan data</th>
@@ -193,7 +193,7 @@
               <?php //for($i = 0; $i < count($year_month); $i++){ ?>
                 <?php for($i = 0; $i <count($data_setor)-1; $i++){ ?>
                 <tr>
-                <td><?php echo $i+1;?></td>
+                <td><?php echo $i+1 ;?></td>
                 <td><?php echo $i+2;?></td>
                 <td>A<?php echo $state1[$i] ?></td>
                 <td>A<?php echo $state2[$i] ?></td>
@@ -201,7 +201,7 @@
                 <?php  } ?>
               
               </tbody>
-            </table>
+            <!-- </table>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -214,25 +214,54 @@
                 </tr>
               </thead>
               <tbody>
-              <?php for($j = 1; $j <=$k; $j++){
-                for($m = 1; $m <=$k; $m++){ 
+              <?php foreach($relasi as $ab=>$cd){
+                //for($m = 1; $m <=$k; $m++){ 
                 ?>
                 <tr>
                 <td>
-                <?php echo "A".$j." ke A".$m ;?>
+                <?php echo $ab;?>
                 </td>
-                <td><?php echo $flrg[$j][$m] ?></td>
+                <td><?php echo $cd ?></td>
                 </tr>
-                <?php  } 
+                <?php // } 
                 }?>
                 
+              
+              </tbody>
+            </table> -->
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzy Logical Relationship Group</th>
+                </tr>
+                <tr>
+                  <th>Current State</th>
+                  <th>Next State</th>
+                  <th>Jumlah</th>
+                </tr>
+                
+                
+              </thead>
+              <tbody>
+              <tr>
+                <?php 
+                for($j = 1; $j <=$k; $j++){?>
+                <td > <?php echo "A".$j ;?></td>
+                <td > <?php for($m=1 ; $m <=$k; $m++){
+                            echo " (A".$m.") = ".$rawcol[$j][$m]."," ;
+                }?>
+                </td>
+                <td > <?php echo $raw[$j] ;?></td>
+                
+                </tr>
+                <?php } ?>
               
               </tbody>
             </table>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;">Matrik probabilitas Markov Chain</th>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90">Matrik probabilitas Markov Chain</th>
                 </tr>
                
                 <tr>
@@ -254,27 +283,27 @@
                 </tr>
                 <tr>
                 <?php for($m = 1; $m <=$k; $m++){?>
-                <th > <?php echo "asd".$m ;?></th>
-                </tr>
-                <?php } ?>
-                <tr>
+                <th rowspan="2"> <?php echo "A".$m ;?></th>
+                
                 <!-- //<th rowspan="2" ><th> -->
                 <?php
                     $kolom = $j-1; 
                     $i=1;    
-                    for($j = 0; $j <$k*$k; $j++){
-                      //for($j = 1; $j <=$k; $j++){
+                      for($j = 1; $j <=$k; $j++){
                       if(($i) % $kolom== 1) {    
                       echo'<tr>';   
                       }  
-                      echo '<th ralign="center" width="300px"><b>'.$trik[$j].'</b></th>';
+                      echo '<th ralign="center" width="300px"><b>'.$trik[$m][$j].'</b></th>';
                       if(($i) % $kolom== 0) {    
                       echo'</tr>';    
                       }
                     $i++;
+                    
                     }
                     ?>
+                   
                     </tr>
+                <?php } ?>
                      
                
                
@@ -283,14 +312,34 @@
               
               </tbody>
             </table>
-            <!-- <?php for($j = 1; $j <=$k ; $j++){
-                for($m = 1 ;$m <=$k; $m++){ 
-                ?>
-            
-            <h1><?php echo $flrg[$j][$m];?> </h1>
-            <h1></h1>
-            <?php  } 
-            }?> -->
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Peramalan Sementara</th>
+                </tr>
+                <tr>
+                  <th>t</th>
+                  <th>Periode</th>
+                  <th>Data Aktual</th>
+                  <th>Peramalan Sementara</th>
+                
+                </tr>
+              </thead>
+              <tbody>
+              
+                
+                <?php for($i = 0; $i <count($data_setor); $i++){ ?> 
+                <tr>
+                <td><?php echo $i+1 ?></td>
+                <td><?php echo $tgl_setor[$i] ; ?></td>
+                <td><?php echo $harga[$i] ?></td>
+                <td><?php echo $Ft[$i] ?></td>
+                 
+                </tr>
+                  <?php } ?>
+              </tbody>
+            </table>
+           
             <div class="box-body chart-responsive">
               <div class="chart" id="line-chart" style="height: 300px;"></div>
             </div>
