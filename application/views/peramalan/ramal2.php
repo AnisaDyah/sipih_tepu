@@ -315,30 +315,34 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Peramalan Sementara</th>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90">Hasil Peramalan</th>
                 </tr>
                 <tr>
                   <th>t</th>
                   <th>Periode</th>
                   <th>Data Aktual</th>
                   <th>Peramalan Sementara</th>
+                  <th>Nilai Penyesuaian</th>
+                  <th>Peramalan Akhir</th>
                 
                 </tr>
               </thead>
               <tbody>
               
-                
                 <?php for($i = 0; $i <count($data_setor); $i++){ ?> 
                 <tr>
                 <td><?php echo $i+1 ?></td>
                 <td><?php echo $tgl_setor[$i] ; ?></td>
                 <td><?php echo $harga[$i] ?></td>
                 <td><?php echo $Ft[$i] ?></td>
-                 
+                <td><?php echo $Dt[$i] ?></td>
+                <td><?php echo $Ft[$i]+$Dt[$i] ?></td>
                 </tr>
                   <?php } ?>
               </tbody>
             </table>
+
+            
            
             <div class="box-body chart-responsive">
               <div class="chart" id="line-chart" style="height: 300px;"></div>

@@ -25,11 +25,10 @@ class Peramalan extends CI_Controller {
     public function ramal2()
     {
         $id_user=$this->input->post('id_user');
-       
-      
         $tgl_awal=$this->input->post('tgl_awal');
         $tgl_akhir=$this->input->post('tgl_akhir');
         $harga=array();
+        $response_databiasa = array();
         
         //mengambil data yang akan diramal
             $data_setor = $this->Peramalan_model->get_tgl($id_user, $tgl_awal, $tgl_akhir);
@@ -212,7 +211,39 @@ class Peramalan extends CI_Controller {
         }
 
             $data['Ft']=$Ft;
-            echo var_dump($Ft);
+
+            //Nilai penyesuaian
+            for($i= 0; $i<count($data_setor); $i++){
+                if($i == 0){
+                    $Dt[$i]=0;
+                }else{
+                    $j=$i-1;
+                    if($state1[$j] == $state2[$j]){
+                        $Dt[$i]=0;
+                    }elseif(($state1[$j]-$state2[$j]) == (-1)){
+                        $Dt[$i]=$l/2;
+                    }elseif(($state1[$j]-$state2[$j]) == 1){
+                        $Dt[$i]=(-($l/2));
+                    }elseif(($state1[$j]-$state2[$j]) < (-1)){
+                        $Dt[$i]=($l/2)*($state2[$j]-$state1[$j]);
+                    }elseif(($state1[$j]-$state2[$j]) > 1){
+                        $Dt[$i]=(-($l/2)*($state1[$j]-$state2[$j]));
+                    }
+
+                }
+            }
+            $data['Dt']=$Dt;
+            $data['Ftend']=$Ft+$Dt;
+            for ($i=0; $i < count($data_setor); $i++) {
+            array_push($response_databiasa, array(
+				"bulan"=>$tgl_setor[$i],
+				"data"=>$harga[$i],
+				"data_peramalan"=>$Ft[$i]+$Dt[$i],
+				)
+            );
+        }
+            //echo var_dump($Dt);
+
             $this->load->view('peramalan/ramal2',$data);
     
         }
