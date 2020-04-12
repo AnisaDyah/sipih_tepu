@@ -54,13 +54,13 @@
     <table id="datatable-buttons" class="table table-striped table-bordered">
     <thead>
     <tr>
-            <th rowspan="1" bgcolor="#0f0f0f">Bulan</th>
-            <th colspan="3" bgcolor="#273e81">Januari</th>
-            <th colspan="3" bgcolor="#273e81">Februari</th>
-            <th colspan="3" bgcolor="#273e81">Maret</th>
-            <th colspan="3" bgcolor="#273e81">April</th>
-            <th colspan="3" bgcolor="#273e81">Mei</th>
-            <th colspan="3" bgcolor="#273e81">Juni</th>
+            <th rowspan="1" bgcolor="#273e81">Bulan</th>
+            <th colspan="3" bgcolor="#90EE90">Januari</th>
+            <th colspan="3" bgcolor="#90EE90">Februari</th>
+            <th colspan="3" bgcolor="#90EE90">Maret</th>
+            <th colspan="3" bgcolor="#90EE90">April</th>
+            <th colspan="3" bgcolor="#90EE90">Mei</th>
+            <th colspan="3" bgcolor="#90EE90">Juni</th>
             </tr>
             <tr>
             <th>Tgl</th>
@@ -176,13 +176,13 @@
         <?php } ?>
         <thead>
           <tr>
-          <th rowspan="1" bgcolor="#0f0f0f">Bulan</th>
-            <th colspan="3" bgcolor="#273e81">Juli</th>
-            <th colspan="3" bgcolor="#273e81">Agustus</th>
-            <th colspan="3" bgcolor="#273e81">September</th>
-            <th colspan="3" bgcolor="#273e81">Oktober</th>
-            <th colspan="3" bgcolor="#273e81">November</th>
-            <th colspan="3" bgcolor="#273e81">Desember</th>
+          <th rowspan="1" bgcolor="#273e81">Bulan</th>
+            <th colspan="3" bgcolor="#90EE90">Juli</th>
+            <th colspan="3" bgcolor="#90EE90">Agustus</th>
+            <th colspan="3" bgcolor="#90EE90">September</th>
+            <th colspan="3" bgcolor="#90EE90">Oktober</th>
+            <th colspan="3" bgcolor="#90EE90">November</th>
+            <th colspan="3" bgcolor="#90EE90">Desember</th>
         </tr>
         
         <tr>

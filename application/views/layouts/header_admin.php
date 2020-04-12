@@ -29,7 +29,7 @@ if($this->session->status !== ('Logged'))
     <link href="<?php echo base_url('assets/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')?>" rel="stylesheet">
-
+    <link rel="stylesheet" href="<?php echo base_url('assets/morris.js/morris.css')?>">
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('assets/build/css/custom.min.css')?>" rel="stylesheet">
     <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/logos2.png">

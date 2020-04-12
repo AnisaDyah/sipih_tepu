@@ -144,8 +144,8 @@ class Setoran extends CI_Controller {
 
     function grafik(){
         $id_user = $this->session->userdata('id_user');
-        $this->Pengguna_model->id_user_level($id_user);
-        if($id_user == '8'){
+        $user_level= $this->session->userdata('id_user_level');
+        if($user_level == '1'){
         $this->load->model('M_grafik');
         $x['data']=$this->M_grafik->get_data_stok();
         $x['user']=$this->Pengguna_model->list();

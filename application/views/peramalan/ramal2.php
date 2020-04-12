@@ -152,7 +152,7 @@
                   <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzyfikasi</th>
                 </tr>
                 <tr>
-                  <th>State ke-</th>
+                  <th>t</th>
                   <th>Data</th>
                   <th>Interval</th>
                   <th>Fuzzyfikasi</th>
@@ -342,10 +342,39 @@
               </tbody>
             </table>
 
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90">Tingkat Akurasi Peramalan</th>
+                </tr>
+                <tr>
+                <th>t</th>
+                  <th>MAPE</th>
+                  <th>MSE</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <?php for($i = 0; $i <count($data_setor); $i++){ ?> 
+                <tr>
+                <td><?php echo $i+1 ?></td>
+                <td><?php echo $mape[$i]."%" ; ?></td>
+                <td><?php echo $mse[$i] ?></td>
+                
+                </tr>
+                  <?php } ?>
+                  <tr>
+                  <td>Total : </td>
+                  <td><?php echo $total_mape/count($data_setor) ?> </td>
+                  <td><?php echo $total_mse/count($data_setor) ?> </td>
+                  </tr>
+              </tbody>
+            </table>
+
             
            
             <div class="box-body chart-responsive">
-              <div class="chart" id="line-chart" style="height: 300px;"></div>
+              <div class="chart" id="line-chart" style="height: 300px; width:1200px;"></div>
             </div>
             <div class="box-body chart-responsive">
               <label>Legend : </label>

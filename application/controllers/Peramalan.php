@@ -231,6 +231,7 @@ class Peramalan extends CI_Controller {
                     }
 
                 }
+                $Ftend[$i]=$Ft[$i]+$Dt[$i];
             }
             $data['Dt']=$Dt;
             $data['Ftend']=$Ft+$Dt;
@@ -238,11 +239,30 @@ class Peramalan extends CI_Controller {
             array_push($response_databiasa, array(
 				"bulan"=>$tgl_setor[$i],
 				"data"=>$harga[$i],
-				"data_peramalan"=>$Ft[$i]+$Dt[$i],
+				"data_peramalan"=>$Ftend[$i],
 				)
             );
         }
-            //echo var_dump($Dt);
+
+        //MAPE dan MSE
+        for ($i=0; $i < count($data_setor); $i++) {
+            if($Ftend[$i] == 0){
+                $mape[$i]=0;
+                $mse[$i]=0;
+            }else{
+            $mape[$i]=(($harga[$i]-$Ftend[$i])/$harga[$i])*100;
+            $mse[$i]=($harga[$i]-$Ftend[$i])*($harga[$i]-$Ftend[$i]);
+            }
+            $total_mape=$total_mape+$mape[$i];
+            $total_mse=$total_mse+$mse[$i];
+        }
+        
+            $data['mape']=$mape;
+            $data['mse']=$mse;
+            $data['total_mape']=$total_mape;
+            $data['total_mse']=$total_mse;
+            $data['response_databiasa']=json_encode($response_databiasa);
+            //echo var_dump($response_databiasa);
 
             $this->load->view('peramalan/ramal2',$data);
     
