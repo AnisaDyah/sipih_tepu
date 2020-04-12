@@ -144,6 +144,8 @@ class Setoran extends CI_Controller {
 
     function grafik(){
         $id_user = $this->session->userdata('id_user');
+        $tahun = $this->input->post('tahun');
+        
         $user_level= $this->session->userdata('id_user_level');
         if($user_level == '1'){
         $this->load->model('M_grafik');
@@ -152,9 +154,19 @@ class Setoran extends CI_Controller {
         $this->load->view('setoran/grafik_setoran',$x);
         } else{
             $this->load->model('M_grafik');
-            $x['data']=$this->M_grafik->get_user_stok($id_user);
+            $x['data']=$this->M_grafik->get_user_stok($id_user,$tahun);
+          
             $this->load->view('setoran_user/grafik_setoran',$x);
         }
+    }
+
+    function cari_setoran(){
+
+        $this->load->model('Setoran_Model');
+        $tahun = $this->Setoran_Model->tahun();
+            $data['tahun']=$tahun;
+            $this->load->view('setoran_user/cari_setoran',$data);
+        
     }
 
 

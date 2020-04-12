@@ -1,8 +1,6 @@
 <!-- footer content -->
 <footer>
-          <div class="pull-right">
-            SIPPKO
-          </div>
+          
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->

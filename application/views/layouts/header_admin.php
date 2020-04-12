@@ -91,7 +91,7 @@ if($this->session->status !== ('Logged'))
                   <li><a><i class="fa fa-edit"></i> Setoran Telur <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url('setoran/setoran_user')?>">Setoran</a></li>
-                      <li><a href="<?php echo base_url('setoran/grafik')?>">Grafik Setoran</a></li>
+                      <li><a href="<?php echo base_url('setoran/cari_setoran')?>">Grafik Setoran</a></li>
                     </ul>
                    
                   </li>
