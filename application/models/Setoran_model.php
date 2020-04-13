@@ -110,7 +110,22 @@ class Setoran_model extends CI_Model {
 		$data['status'] = $this->input->post('status');
 		$this->db->where('id_setoran',$id);
 		$this->db->update('setoran_telur',$data);
-	    }
+        }
+        
+        //export excel
+        public function export_setoran($tgl_awal, $tgl_akhir)
+	{
+		$this->db->where('tgl_setoran BETWEEN "'.$tgl_awal.'" AND "'.$tgl_akhir.'"');
+		$this->db->order_by('tgl_setoran', 'ASC');
+		return $this->db->get('setoran_telur')->result();
+    }
+    public function export_setoran_user($id_user,$tgl_awal, $tgl_akhir)
+	{
+        $this->db->where('id_user',$id_user);
+		$this->db->where('tgl_setoran BETWEEN "'.$tgl_awal.'" AND "'.$tgl_akhir.'"');
+		$this->db->order_by('tgl_setoran', 'ASC');
+		return $this->db->get('setoran_telur')->result();
+	}
 
 }
 
