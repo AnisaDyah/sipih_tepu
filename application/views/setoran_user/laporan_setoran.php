@@ -20,15 +20,7 @@
                   <div class="x_content">
                   <form role="form" action="<?php echo site_url('Laporan/export_setoran') ?>" method="post">
             <div class="box-body">
-            <div class="form-group">
-                <label>setoran dari Peternak : </label>
-                <select class="form-control select2" name="id_user">
-                    <option value="">semua peternak</option>
-                  <?php foreach ($user as $key): ?>
-                    <option value="<?php echo $key->id_user; ?>"><?php echo $key->nama_lengkap; ?></option>
-                  <?php endforeach ?>
-                </select>
-              </div>
+            
               <div class="form-group">
                 <label>Tanggal Awal</label>
                 <input type="text" name="tgl_awal" class="form-control pull-right" id="datepicker" placeholder="YYYY-MM-DD">

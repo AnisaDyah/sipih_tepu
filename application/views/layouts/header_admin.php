@@ -30,6 +30,7 @@ if($this->session->status !== ('Logged'))
     <link href="<?php echo base_url('assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css')?>" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url('assets/morris.js/morris.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') ?>">
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('assets/build/css/custom.min.css')?>" rel="stylesheet">
     <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/logos2.png">
@@ -84,7 +85,7 @@ if($this->session->status !== ('Logged'))
                       <li><a href="<?php echo base_url('setoran/')?>">Setoran</a></li>
                       <li><a href="<?php echo base_url('setoran/tabel')?>">Tabel Setoran</a></li>
                       <li><a href="<?php echo base_url('setoran/grafik')?>">Grafik Setoran</a></li>
-                      <li><a href="<?php echo base_url('setoran/load_laporan')?>">Cetak Laporan</a></li>
+                      <li><a href="<?php echo base_url('laporan/')?>">Cetak Laporan</a></li>
                     </ul>
                   </li>
                   <?php endif; ?>
@@ -93,6 +94,7 @@ if($this->session->status !== ('Logged'))
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url('setoran/setoran_user')?>">Setoran</a></li>
                       <li><a href="<?php echo base_url('setoran/cari_setoran')?>">Grafik Setoran</a></li>
+                      <li><a href="<?php echo base_url('laporan/')?>">Cetak Laporan</a></li>
                     </ul>
                    
                   </li>
