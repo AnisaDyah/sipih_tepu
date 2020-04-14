@@ -45,7 +45,7 @@ class Setoran extends CI_Controller {
        
             $data = [
                 'id_user' => $this->input->post('id_user'),
-                'tgl_setoran' =>$this->input->post('tgl_setoran'),
+                'tgl_setoran' =>date_format(date_create($this->input->post('tgl_setoran')), 'Y-m-d'),
                 'jml_setoran' => $this->input->post('jml_setoran'),
                 'harga' => $this->input->post('harga'),
                 'total' =>$this->input->post('total'),
@@ -86,7 +86,7 @@ class Setoran extends CI_Controller {
        
             $data = [
                 'id_user' => $this->input->post('id_user'),
-                'tgl_setoran' =>$this->input->post('tgl_setoran'),
+                'tgl_setoran' =>date_format(date_create($this->input->post('tgl_setoran')), 'Y-m-d'),
                 'jml_setoran' => $this->input->post('jml_setoran'),
                 'harga' => $this->input->post('harga'),
                 'total' =>$this->input->post('total')
@@ -190,30 +190,7 @@ class Setoran extends CI_Controller {
             redirect('setoran/setoran_user','refresh');
         }
 
-    //export setoran
-    public function load_laporan()
-	{
-        $this->load->model('Peramalan_model');
-        $user = $this->Peramalan_model->get_user();
-        $data['user']=$user;
-		$this->load->view('setoran/laporan_setoran',$data);
-	}
-    public function export_setoran()
-	{
-        $id_user = $this->input->post('id_user');
-        $tgl_awal = date_format(date_create($this->input->post('tgl_awal')), 'Y-m-d');
-        $tgl_akhir = date_format(date_create($this->input->post('tgl_akhir')), 'Y-m-d');
-        $this->load->model('Peramalan_model');
-        $user = $this->Peramalan_model->get_user();
-        $data['user']=$user;
-        if($id_user == NULL){
-            $data['setoran'] = $this->Setoran_Model->export_setoran($tgl_awal, $tgl_akhir);
-        }else{
-            $data['setoran'] = $this->Setoran_Model->export_setoran_user($id_user,$tgl_awal, $tgl_akhir);
-        }
-		
-		$this->load->view('setoran/excel_setoran', $data);
-	}
+    
 
     
 }

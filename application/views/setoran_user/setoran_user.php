@@ -70,7 +70,7 @@
                             } ?>
                             </td>
                         <td>
-              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-change-status<?php echo $value->id_setoran ?>" data-id="<?php echo $value->id_setoran ?> data-status="<?php echo $value->status ?>"" >
+              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-change-status<?php echo $value->id_setoran ?>" data-id="<?php echo $value->id_setoran ?>" data-status="<?php echo $value->status ?>" >
                 Konfirmasi
               </button>
               <div class="modal fade" id="modal-change-status<?php echo $value->id_setoran ?>" tabindex="-1" role="dialog" aria-labelledby="modal-change-status-Label" aria-hidden="true">

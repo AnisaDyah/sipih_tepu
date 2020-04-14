@@ -35,9 +35,28 @@
     <script src="<?php echo base_url('assets/vendors/pdfmake/build/vfs_fonts.js')?>"></script>
     <script src="<?php echo base_url('assets/raphael/raphael.min.js')?>"></script>
     <script src="<?php echo base_url('assets/morris.js/morris.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') ?>"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url('assets/build/js/custom.min.js')?>"></script>
+    <script>
+    $(function () {
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true,
+      format: 'yyyy-mm-dd'
+    })
+
+    $('#datepicker2').datepicker({
+      autoclose: true,
+      format: 'yyyy-mm-dd'
+    })
+
+    //Date picker Bulan
+   
+
+    
+  })</script>
     <script>
   $(function () {
     var line = new Morris.Line({

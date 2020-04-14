@@ -23,20 +23,13 @@
             <div class="box-body">
               <div class="form-group">
                 <label>Bulan Awal</label>
-                <input type="text" name="tgl_awal" class="form-control pull-right" id="datepickerbulan">
+                <input type="text" name="tgl_awal" class="form-control pull-right" id="datepicker" placeholder="YYYY-MM-DD">
               </div>
               <div class="form-group">
                 <label>Bulan Yang ingin diramal</label>
-                <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepickerbulan2">
+                <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepicker2" placeholder="YYYY-MM-DD">
               </div>
-              <!-- <div class="form-group">
-                <label>Produk</label>
-                <select class="form-control select2" name="produk">
-                  <?php //foreach ($produk as $key): ?>
-                    <option value="<?php //echo $key->id_produk; ?>"><?php //echo $key->nama_produk; ?></option>
-                  <?php //endforeach ?>
-                </select>
-              </div> -->
+            
               <div class="form-group">
                 <label>setoran dari Peternak : </label>
                 <select class="form-control select2" name="id_user">

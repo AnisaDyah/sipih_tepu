@@ -25,14 +25,15 @@ class Peramalan extends CI_Controller {
     public function ramal2()
     {
         $id_user=$this->input->post('id_user');
-        $tgl_awal=$this->input->post('tgl_awal');
-        $tgl_akhir=$this->input->post('tgl_akhir');
+        $tgl_awal=date_format(date_create($this->input->post('tgl_awal')), 'Y-m-d');
+        $tgl_akhir=date_format(date_create($this->input->post('tgl_akhir')), 'Y-m-d');
         $harga=array();
         $response_databiasa = array();
         
         //mengambil data yang akan diramal
             $data_setor = $this->Peramalan_model->get_tgl($id_user, $tgl_awal, $tgl_akhir);
-            
+            $harga=array();
+            $tgl_setor=array();
             foreach($data_setor as $key){
                 $harga[] = $key->harga;
                 $tgl_setor[]=$key->tgl_setoran;
@@ -245,6 +246,10 @@ class Peramalan extends CI_Controller {
         }
 
         //MAPE dan MSE
+        $mape=array();
+        $mse=array();
+        $total_mape=0;
+        $total_mse=0;
         for ($i=0; $i < count($data_setor); $i++) {
             if($Ftend[$i] == 0){
                 $mape[$i]=0;
@@ -262,7 +267,7 @@ class Peramalan extends CI_Controller {
             $data['total_mape']=$total_mape;
             $data['total_mse']=$total_mse;
             $data['response_databiasa']=json_encode($response_databiasa);
-            //echo var_dump($response_databiasa);
+            echo var_dump($data_setor);
 
             $this->load->view('peramalan/ramal2',$data);
     
