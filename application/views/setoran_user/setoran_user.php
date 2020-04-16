@@ -27,8 +27,7 @@
                           <th width="15%">Jumlah Setoran</th>
                           <th width="10%">Harga</th>
                           <th width="10%">Total</th>
-                          <th width="10%">Status Setoran</th>
-                          <th width="10%">Validasi Setoran</th>
+                          <th width="10%">Status</th>
                           
                           
                         </tr>

@@ -142,23 +142,54 @@ class Setoran extends CI_Controller {
      
       }
 
-    function grafik(){
+    function grafik_user(){
+        $setoran_chart_user=array();
         $id_user = $this->session->userdata('id_user');
         $tahun = $this->input->post('tahun');
-        
-        $user_level= $this->session->userdata('id_user_level');
-        if($user_level == '1'){
         $this->load->model('M_grafik');
-        $x['data']=$this->M_grafik->get_data_stok();
-        $x['user']=$this->Pengguna_model->list();
-        $this->load->view('setoran/grafik_setoran',$x);
-        } else{
-            $this->load->model('M_grafik');
-            $x['data']=$this->M_grafik->get_user_stok($id_user,$tahun);
-          
-            $this->load->view('setoran_user/grafik_setoran',$x);
+        $setoran_user=$this->M_grafik->get_user_stok($id_user,$tahun);
+        foreach($setoran_user as $soa){
+            $jml_setor_user[]=$soa->jml_setoran;
+            $tgl_setor[]=$soa->tgl_setoran;
         }
+        for ($i=0; $i < count($setoran_user); $i++) {
+            array_push($setoran_chart_user, array(
+				"jml_setor_user"=>$jml_setor_user[$i],
+                "tgl_setor"=>$tgl_setor[$i],
+				)
+            );
+        }
+        $data['setoran_chart_user']=json_encode($setoran_chart_user);
+        $this->load->view('setoran_user/grafik_setoran',$data);
     }
+
+    function grafik_admin(){
+        $setoran_chart=array();
+        $this->load->model('M_grafik');
+        $setoran=$this->M_grafik->get_data_stok();
+        $user=$this->Pengguna_model->list();
+        foreach($setoran as $key){
+            $jml_setor[]=$key->jml_setoran;
+            foreach($user as $var){
+                if($key->id_user == $var->id_user){
+                    $nama_peternak[]=$var->nama_lengkap;
+                    $id_user[]=$var->id_user;
+                }
+            }
+        }
+        for ($i=0; $i < count($nama_peternak); $i++) {
+            array_push($setoran_chart, array(
+				"jml_setor"=>$jml_setor[$i],
+                "nama_peternak"=>$nama_peternak[$i],
+                "id_user"=>$id_user[$i],
+				)
+            );
+        }
+        $data['setoran_chart']=json_encode($setoran_chart);
+        $this->load->view('setoran/grafik_setoran',$data);
+        
+    }
+
 
     function cari_setoran(){
 

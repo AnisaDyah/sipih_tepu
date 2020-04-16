@@ -65,6 +65,7 @@
       data: <?php echo $response_databiasa; ?>,
       xkey: 'bulan',
       ykeys: ['data', 'data_peramalan'],
+      labels: ['Data Real','Data Ramalan'],
       parseTime: false,
       xLabelAngle: 60,
       lineColors: ['#3c8dbc', 'red'],
@@ -77,6 +78,25 @@
     $('#legend').append(legendItem);
     
   });
+</script>
+<script>
+         var bar = new Morris.Bar({
+          element: 'bar-chart',
+          data: <?php echo $setoran_chart;?>,
+          xkey: 'nama_peternak',
+          ykeys: ['jml_setor'],
+          labels: ['Jumlah setoran'],
+        });
+</script>
+<script>
+         var bar2= new Morris.Bar({
+          element: 'bar-chart2',
+          data: <?php echo $setoran_chart_user;?>,
+          xkey: 'tgl_setor',
+          ykeys: ['jml_setor_user'],
+          labels: ['Jumlah setoran'],
+          xLabelAngle: 60,
+        });
 </script>
   </body>
 </html>

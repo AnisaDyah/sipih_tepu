@@ -84,7 +84,7 @@ if($this->session->status !== ('Logged'))
                       <li><a href="<?php echo base_url('setoran/create')?>">Tambah Setoran</a></li>
                       <li><a href="<?php echo base_url('setoran/')?>">Setoran</a></li>
                       <li><a href="<?php echo base_url('setoran/tabel')?>">Tabel Setoran</a></li>
-                      <li><a href="<?php echo base_url('setoran/grafik')?>">Grafik Setoran</a></li>
+                      <li><a href="<?php echo base_url('setoran/grafik_admin')?>">Grafik Setoran</a></li>
                       <li><a href="<?php echo base_url('laporan/')?>">Cetak Laporan</a></li>
                     </ul>
                   </li>

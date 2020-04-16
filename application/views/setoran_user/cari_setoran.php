@@ -18,7 +18,7 @@
                   </div>
                   <div class="x_content">
 <table class="table table-striped">
-<?php echo form_open("Setoran/grafik") ?>
+<?php echo form_open("Setoran/grafik_user") ?>
 
 <td><label for="tahun">Tahun </label>
       <select name="tahun" class="form-control" required>

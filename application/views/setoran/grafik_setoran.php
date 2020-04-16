@@ -19,43 +19,10 @@
                   </div>
                   <div class="x_content">
  
-    <canvas id="canvas" width="1000" height="500"></canvas>
-    <?php
-        foreach($data as $data){
-          foreach($user as $key){
-            if($data->id_user == $key->id_user){
-            $id_user[] = $key->nama_lengkap;
-            $jml_setoran[] =$data->jml_setoran;
-            }
-        }
-      }
-    ?>
-    <!--Load chart js-->
-    
-    <script type="text/javascript" src="<?php echo base_url().'assets/chartjs/chart.min.js'?>"></script>
-    <script>
- 
-            var lineChartData = {
-                labels : <?php echo json_encode($id_user);?>,
-                datasets : [
-                     
-                    {
-                        fillColor: "rgba(60,141,188,0.9)",
-                        strokeColor: "rgba(60,141,188,0.8)",
-                        pointColor: "#3b8bba",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(152,235,239,1)",
-                        data : <?php echo json_encode($jml_setoran);?>
-                    }
- 
-                ]
-                 
-            }
- 
-        var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(lineChartData);
-         
-    </script>
+                  <div class="box-body chart-responsive">
+              <div class="chart" id="bar-chart" style="height: 300px; width:1200px;"></div>
+            </div>
+           
  </div>
                 </div>
               </div>
