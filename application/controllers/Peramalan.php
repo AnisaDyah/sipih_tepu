@@ -236,14 +236,7 @@ class Peramalan extends CI_Controller {
             }
             $data['Dt']=$Dt;
             $data['Ftend']=$Ft+$Dt;
-            for ($i=0; $i < count($data_setor); $i++) {
-            array_push($response_databiasa, array(
-				"bulan"=>$tgl_setor[$i],
-				"data"=>$harga[$i],
-				"data_peramalan"=>$Ftend[$i],
-				)
-            );
-        }
+            
 
         //MAPE dan MSE
         $mape=array();
@@ -266,9 +259,101 @@ class Peramalan extends CI_Controller {
             $data['mse']=$mse;
             $data['total_mape']=$total_mape;
             $data['total_mse']=$total_mse;
-            $data['response_databiasa']=json_encode($response_databiasa);
-            echo var_dump($data_setor);
+            
+           
+            //peramalan 2 bulan kedepan
+            for($i = 0 ; $i <8 ; $i++){
+                for($j=0 ; $j<8; $j++){
+                    if($j == 0){
+                        $g=count($Fz)-1;
+                        $state1_new[$j]=$Fz[$g];
+                    }else{
+                        $state1_new[$j]=$state2_new[$i-1];
+                    }
+                }
+                //peramalan sementara
+                if($i==0){
+                $p=$state1_new[0];
+                if(count($rawcol[$p])== 1){
+                    $Ft_new[$i]=$nt[$p];
+                }else{
+                    for($n=1 ; $n<=$p-1 ; $n++){
+                    $depan[$i]=$depan[$i]+$nt[$n-1]*$mat[$p][$n];
+                   }
+                   $q=count($harga)-1;
+                    $tengah = $harga[$q]*$mat[$p][$p] ;
 
+                    for($o=$p+1 ; $o<=$k ; $o++){
+                      $belakang[$i]=$belakang[$i]+$nt[$o-1]*$mat[$p][$o];
+                     } 
+                    $Ft_new[$i]=$depan[$i]+$tengah+$belakang[$i];
+                    
+
+                }
+            }else{
+                $p=$state2_new[$i-1];
+                if(count($rawcol[$p])== 1){
+                    $Ft_new[$i]=$nt[$p];
+                }else{
+                    for($n=1 ; $n<=$p-1 ; $n++){
+                        $depan[$i]=0;
+                    $depan[$i]=$depan[$i]+$nt[$n-1]*$mat[$p][$n];
+                   }
+                    $tengah = $ftend_new[$i-1]*$mat[$p][$p] ;
+
+                    for($o=$p+1 ; $o<=$k ; $o++){
+                        $belakang[$i]=0;
+                      $belakang[$i]=$belakang[$i]+$nt[$o-1]*$mat[$p][$o];
+                     } 
+                    $Ft_new[$i]=$depan[$i]+$tengah+$belakang[$i];
+                    $test[$i]=$depan[$i].",".$tengah.",".$belakang[$i];
+            }
+        }
+                //Fuzzyfikasi
+                for($a= 0; $a<=$k-1; $a++){
+                    if($Ft_new[$i] > $interval[$a]){
+                        if($Ft_new[$i] < $interval[$a+1]){
+                            $U= $a+1;
+                        }
+                    }
+                }
+                $state2_new[$i]=$U+1;
+            //}
+                
+                //nilai penyesuaian
+                if($state1_new[$i] == $state2_new[$i]){
+                    $Dt_new[$i]=0;
+                }elseif(($state1_new[$i]-$state2_new[$i]) == (-1)){
+                    $Dt_new[$i]=$l/2;
+                }elseif(($state1_new[$i]-$state2_new[$i]) == 1){
+                    $Dt_new[$i]=(-($l/2));
+                }elseif(($state1_new[$i]-$state2_new[$i]) < (-1)){
+                    $Dt_new[$i]=($l/2)*($state2_new[$i]-$state1_new[$i]);
+                }elseif(($state1_new[$i]-$state2_new[$i]) > 1){
+                    $Dt_new[$i]=(-($l/2)*($state1_new[$i]-$state2_new[$i]));
+                }
+
+                //peramalan akhir
+                $ftend_new[$i]=$Ft_new[$i]+$Dt_new[$i];
+            
+        }
+        
+        for($i=count($data_setor) ; $i<count($data_setor)+8 ; $i++){
+            $Ftend[$i]=$ftend_new[$i-count($data_setor)];
+            $x=$i-count($data_setor);
+            $tgl_setor[$i]="minggu ke-".$x;
+        }
+        for ($i=0; $i < count($Ftend); $i++) {
+            array_push($response_databiasa, array(
+				"bulan"=>$tgl_setor[$i],
+				"data"=>$harga[$i],
+				"data_peramalan"=>$Ftend[$i],
+				)
+            );
+        }
+        $data['response_databiasa']=json_encode($response_databiasa);
+        $data['ftend_new']=$ftend_new;
+        echo var_dump($state1_new);
             $this->load->view('peramalan/ramal2',$data);
     
         }

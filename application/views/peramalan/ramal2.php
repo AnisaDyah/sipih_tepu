@@ -18,12 +18,13 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-              <?php //echo "Peramalan produk ".$produk->nama_produk." menggunakan konstanta ".$konstanta; ?>
-              <?php //echo "Peramalan kategori ".$kategori->nama_kategori." menggunakan konstanta ".$konstanta; ?>
-            </h3>
+              
           </div>
           <!-- /.box-header -->
           <div class="box-body">
+          <table class="table">
+          <tr>
+          <td>
           <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -46,7 +47,51 @@
               <?php } ?>
               </tbody>
             </table>
-           
+          </td>
+          <td>
+          <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzy Logical Relationship</th>
+                </tr>
+                <tr>
+                  <th colspan="2" style="text-align: center;">urutan data</th>
+                  <th colspan="2" style="text-align: center;">Fuzzy Logical Relationship</th>
+                
+                </tr>
+                <tr>
+                <th>Current State</th>
+                <th>Next State</th>
+                <th>Current State</th>
+                <th>Next State</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
+                <?php for($i = 0; $i <count($data_setor)-1; $i++){ ?>
+                <tr>
+                <td><?php echo $i+1 ;?></td>
+                <td><?php echo $i+2;?></td>
+                <td>A<?php echo $state1[$i] ?></td>
+                <td>A<?php echo $state2[$i] ?></td>
+                </tr>
+                <?php  } ?>
+              
+              </tbody>
+              </table>
+          </td>
+          </tr>
+          </table>
+         
+            </div>
+          <!-- /.box-body -->
+          </div>
+          <div class="x_panel">
+          <div class="box-body">
+            <table class="table">
+            <thead>
+            <tr>
+            <td>
             <table  class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -82,7 +127,8 @@
                 </tr>
               </thead>
             </table>
-           
+            </td>
+            <td>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -91,6 +137,8 @@
                 <tr>
                   <th>Kelas Interval</th>
                   <th>Nilai</th>
+                  <th>Nilai Tengah</th>
+                  
                 
                 </tr>
               </thead>
@@ -115,38 +163,16 @@
                 }?>
 
            <?php echo $jki ; ?></td> 
-           
+           <td><?php echo $nt[$i] ?></td>
                 </tr>
                 <?php  } ?>
               
               </tbody>
             </table>
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Nilai Tengah</th>
-                </tr>
-                <tr>
-                  <th>Nilai Tengah</th>
-                  <th>Nilai</th>
-                
-                </tr>
-              </thead>
-              <tbody>
-              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
-                <?php for($i = 0; $i <=$k-1; $i++){ ?>
-                <tr>
-                <td>
-                A<?php echo $i+1;?>
-                </td>
-                <td><?php echo $nt[$i] ?></td>
-                </tr>
-                <?php  } ?>
-              
-              </tbody>
-            </table>
+           </td>
            
-            <table class="table table-bordered table-striped">
+           <td>
+            <table class=" table table-bordered table-striped" width="300px" box-shadow=" 7px 7px">
               <thead>
                 <tr>
                   <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzyfikasi</th>
@@ -172,63 +198,20 @@
               
               </tbody>
             </table>
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzy Logical Relationship</th>
-                </tr>
-                <tr>
-                  <th colspan="2" style="text-align: center;">urutan data</th>
-                  <th colspan="2" style="text-align: center;">Fuzzy Logical Relationship</th>
-                
-                </tr>
-                <tr>
-                <th>Current State</th>
-                <th>Next State</th>
-                <th>Current State</th>
-                <th>Next State</th>
-                </tr>
-              </thead>
-              <tbody>
-              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
-                <?php for($i = 0; $i <count($data_setor)-1; $i++){ ?>
-                <tr>
-                <td><?php echo $i+1 ;?></td>
-                <td><?php echo $i+2;?></td>
-                <td>A<?php echo $state1[$i] ?></td>
-                <td>A<?php echo $state2[$i] ?></td>
-                </tr>
-                <?php  } ?>
-              
-              </tbody>
-            <!-- </table>
-            <table class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                  <th colspan="5" style="text-align: center;">Fuzzy Logical Relationship Group</th>
-                </tr>
-                <tr>
-                  <th>Current State -> Next State</th>
-                  <th>Jumlah</th>
-                
-                </tr>
-              </thead>
-              <tbody>
-              <?php foreach($relasi as $ab=>$cd){
-                //for($m = 1; $m <=$k; $m++){ 
-                ?>
-                <tr>
-                <td>
-                <?php echo $ab;?>
-                </td>
-                <td><?php echo $cd ?></td>
-                </tr>
-                <?php // } 
-                }?>
-                
-              
-              </tbody>
-            </table> -->
+            </td>
+            </tr>
+            </thead>
+            </table>
+            </div>
+          <!-- /.box-body -->
+          </div>
+           
+          <div class="x_panel">
+          <div class="box-body">
+            <table class="table">
+            <thead>
+            <tr>
+            <td>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -258,6 +241,8 @@
               
               </tbody>
             </table>
+            </td>
+            <td>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -312,6 +297,20 @@
               
               </tbody>
             </table>
+            </td>
+            </tr>
+            </thead>
+            </table>
+            </div>
+          <!-- /.box-body -->
+          </div>
+          
+          <div class="x_panel">
+          <div class="box-body">
+            <table class="table">
+            <thead>
+            <tr>
+            <td>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -341,7 +340,8 @@
                   <?php } ?>
               </tbody>
             </table>
-
+            </td>
+            <td>
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -370,8 +370,51 @@
                   </tr>
               </tbody>
             </table>
-
+            </td>
+          </tr>
+          </table>
+         
+            </div>
+          <!-- /.box-body -->
+          </div>
             
+            
+
+          <div class="x_panel">
+          <div class="box-body">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90">Peramalan 2 bulan kedepan</th>
+                </tr>
+                <tr>
+                <!-- <th>t</th> -->
+                  <th>bulan</th>
+                  <th>peramalan</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+                <?php for($i = 0; $i <8; $i++){ ?> 
+                <tr>
+                <!-- <td><?php echo $i+1 ?></td> -->
+                <td><?php echo "mingu ke-".$i ; ?></td>
+                <td><?php echo $ftend_new[$i] ?></td>
+                
+                </tr>
+                  <?php } ?>
+                  
+              </tbody>
+            </table>
+
+             </div>
+          <!-- /.box-body -->
+          </div>
+            
+            
+
+          <div class="x_panel">
+          <div class="box-body">
            
             <div class="box-body chart-responsive">
               <div class="chart" id="line-chart" style="height: 300px; width:1200px;"></div>
@@ -381,9 +424,10 @@
               <div id="legend" style="height: auto;">
               </div>
             </div>
-          </div>
+            </div>
           <!-- /.box-body -->
           </div>
+         
               </div>
 
               
