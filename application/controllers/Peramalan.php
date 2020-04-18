@@ -24,7 +24,13 @@ class Peramalan extends CI_Controller {
 
     public function ramal2()
     {
-        $id_user=$this->input->post('id_user');
+        $user_level=$this->session->userdata('id_user_level');
+        if($user_level == 1){
+            $id_user=$this->input->post('id_user');
+        }else{
+            $id_user=$this->session->userdata('id_user');
+        }
+        //$id_user=$this->input->post('id_user');
         $tgl_awal=date_format(date_create($this->input->post('tgl_awal')), 'Y-m-d');
         $tgl_akhir=date_format(date_create($this->input->post('tgl_akhir')), 'Y-m-d');
         $harga=array();
@@ -86,19 +92,16 @@ class Peramalan extends CI_Controller {
             $U=0;
            
             
-
+            
             for($i = 0; $i <=$k; $i++){
                   if($i==0){
-                      $nki=$dmin-$d1;
+                      $nki[$i]=$dmin-$d1;
                   }else{
-                $nki= $nki + $l ;
-                $interval[]=$nki;
+                $nki[$i]= $nki[$i-1] + $l ;
+               // $interval[]=$nki;
             }
-                for($j = 0; $j <=$k-1; $j++){ 
                 
-                    $jki= $nki+$l;
-                }
-                $nt[]=($jki+$nki)/2;
+               $nt[$i]=($nki[$i-1]+$nki[$i])/2;
             }
                   
             $data['nki']=$nki;
@@ -110,13 +113,15 @@ class Peramalan extends CI_Controller {
             //Fuzzyfikasi
             for($i= 0; $i<count($data_setor); $i++){
                 for($j= 0; $j<=$k-1; $j++){
-                    if($harga[$i] > $interval[$j]){
-                        if($harga[$i] < $interval[$j+1]){
-                            $U= $j+1;
+                    if($harga[$i] >= $nki[$j]){
+                        if($harga[$i] <= $nki[$j+1]){
+                            $Fz[$i]= $j+1;
+                        }else{
+                            $Fz[$i]=$k;
                         }
                     }
                 }
-                $Fz[]=$U+1;
+                //$Fz[]=$U+1;
             }
             
             $data['Fz']=$Fz;
@@ -191,16 +196,16 @@ class Peramalan extends CI_Controller {
                           $Ft[$i]=$nt[$j];
                       }else{
                           for($n=1 ; $n<=$j-1 ; $n++){
-                          $depan[$i]=$depan[$i]+$nt[$n-1]*$mat[$j][$n];
+                          $depan[$i]=$depan[$i]+$nt[$n]*$mat[$j][$n];
                          }
                           //$nt[$j-1]*$mat[$j][$j-1] + 
                           $tengah = $harga[$i-1]*$mat[$j][$j] ;
-
+ 
                           for($o=$j+1 ; $o<=$k ; $o++){
-                            $belakang[$i]=$belakang[$i]+$nt[$o-1]*$mat[$j][$o];
+                            $belakang[$i]=$belakang[$i]+$nt[$o]*$mat[$j][$o];
                            } 
                           //$nt[$j+1]*$mat[$j][$j+1] +
-                          $Ft[$i]=$depan[$i] + $tengah + $belakang[$i];
+                          $Ft[$i]=$depan[$i]+$tengah+$belakang[$i];
                           
                       }
                         
@@ -268,7 +273,7 @@ class Peramalan extends CI_Controller {
                         $g=count($Fz)-1;
                         $state1_new[$j]=$Fz[$g];
                     }else{
-                        $state1_new[$j]=$state2_new[$i-1];
+                        $state1_new[$j]=$state2_new[$j-1];
                     }
                 }
                 //peramalan sementara
@@ -278,16 +283,16 @@ class Peramalan extends CI_Controller {
                     $Ft_new[$i]=$nt[$p];
                 }else{
                     for($n=1 ; $n<=$p-1 ; $n++){
-                    $depan[$i]=$depan[$i]+$nt[$n-1]*$mat[$p][$n];
+                    $depan[$i]=$depan[$i]+$nt[$n]*$mat[$p][$n];
                    }
                    $q=count($harga)-1;
                     $tengah = $harga[$q]*$mat[$p][$p] ;
 
                     for($o=$p+1 ; $o<=$k ; $o++){
-                      $belakang[$i]=$belakang[$i]+$nt[$o-1]*$mat[$p][$o];
+                      $belakang[$i]=$belakang[$i]+$nt[$o]*$mat[$p][$o];
                      } 
                     $Ft_new[$i]=$depan[$i]+$tengah+$belakang[$i];
-                    
+                    //$test2[$i]=$depan[$i].",".$tengah.",".$belakang[$i];
 
                 }
             }else{
@@ -297,27 +302,27 @@ class Peramalan extends CI_Controller {
                 }else{
                     for($n=1 ; $n<=$p-1 ; $n++){
                         $depan[$i]=0;
-                    $depan[$i]=$depan[$i]+$nt[$n-1]*$mat[$p][$n];
+                    $depan[$i]=$depan[$i]+$nt[$n]*$mat[$p][$n];
                    }
                     $tengah = $ftend_new[$i-1]*$mat[$p][$p] ;
 
                     for($o=$p+1 ; $o<=$k ; $o++){
-                        $belakang[$i]=0;
-                      $belakang[$i]=$belakang[$i]+$nt[$o-1]*$mat[$p][$o];
+                        //$belakang[$i]=0;
+                      $belakang1[$i]=$belakang1[$i]+$nt[$o]*$mat[$p][$o];
                      } 
-                    $Ft_new[$i]=$depan[$i]+$tengah+$belakang[$i];
-                    $test[$i]=$depan[$i].",".$tengah.",".$belakang[$i];
+                    $Ft_new[$i]=$depan[$i]+$tengah+$belakang1[$i];
+                    $test[$i]=$depan[$i].",".$tengah.",".$belakang1[$i];
             }
         }
                 //Fuzzyfikasi
                 for($a= 0; $a<=$k-1; $a++){
-                    if($Ft_new[$i] > $interval[$a]){
-                        if($Ft_new[$i] < $interval[$a+1]){
-                            $U= $a+1;
+                    if($Ft_new[$i] >= $nki[$a]){
+                        if($Ft_new[$i] <= $nki[$a+1]){
+                            $state2_new[$i]=$a+1;
                         }
                     }
                 }
-                $state2_new[$i]=$U+1;
+                //$state2_new[$i]=$U+1;
             //}
                 
                 //nilai penyesuaian
@@ -354,6 +359,7 @@ class Peramalan extends CI_Controller {
         $data['response_databiasa']=json_encode($response_databiasa);
         $data['ftend_new']=$ftend_new;
         echo var_dump($state1_new);
+
             $this->load->view('peramalan/ramal2',$data);
     
         }

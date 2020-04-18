@@ -49,36 +49,32 @@
             </table>
           </td>
           <td>
-          <table class="table table-bordered table-striped">
+          <table class=" table table-bordered table-striped" width="300px" box-shadow=" 7px 7px">
               <thead>
                 <tr>
-                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzy Logical Relationship</th>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzyfikasi</th>
                 </tr>
                 <tr>
-                  <th colspan="2" style="text-align: center;">urutan data</th>
-                  <th colspan="2" style="text-align: center;">Fuzzy Logical Relationship</th>
+                  <th>t</th>
+                  <th>Data</th>
+                  <th>Interval</th>
+                  <th>Fuzzyfikasi</th>
                 
-                </tr>
-                <tr>
-                <th>Current State</th>
-                <th>Next State</th>
-                <th>Current State</th>
-                <th>Next State</th>
                 </tr>
               </thead>
               <tbody>
               <?php //for($i = 0; $i < count($year_month); $i++){ ?>
-                <?php for($i = 0; $i <count($data_setor)-1; $i++){ ?>
+                <?php for($i = 0; $i <count($data_setor); $i++){ ?>
                 <tr>
-                <td><?php echo $i+1 ;?></td>
-                <td><?php echo $i+2;?></td>
-                <td>A<?php echo $state1[$i] ?></td>
-                <td>A<?php echo $state2[$i] ?></td>
+                <td><?php echo $i+1;?></td>
+                <td><?php echo $harga[$i];?></td>
+                <td>U<?php echo $Fz[$i] ?></td>
+                <td>A<?php echo $Fz[$i] ?></td>
                 </tr>
                 <?php  } ?>
               
               </tbody>
-              </table>
+            </table>
           </td>
           </tr>
           </table>
@@ -163,7 +159,7 @@
                 }?>
 
            <?php echo $jki ; ?></td> 
-           <td><?php echo $nt[$i] ?></td>
+           <td><?php echo $nt[$i+1] ?></td>
                 </tr>
                 <?php  } ?>
               
@@ -172,32 +168,7 @@
            </td>
            
            <td>
-            <table class=" table table-bordered table-striped" width="300px" box-shadow=" 7px 7px">
-              <thead>
-                <tr>
-                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzyfikasi</th>
-                </tr>
-                <tr>
-                  <th>t</th>
-                  <th>Data</th>
-                  <th>Interval</th>
-                  <th>Fuzzyfikasi</th>
-                
-                </tr>
-              </thead>
-              <tbody>
-              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
-                <?php for($i = 0; $i <count($data_setor); $i++){ ?>
-                <tr>
-                <td><?php echo $i+1;?></td>
-                <td><?php echo $harga[$i];?></td>
-                <td>U<?php echo $Fz[$i] ?></td>
-                <td>A<?php echo $Fz[$i] ?></td>
-                </tr>
-                <?php  } ?>
-              
-              </tbody>
-            </table>
+            
             </td>
             </tr>
             </thead>
@@ -211,6 +182,38 @@
             <table class="table">
             <thead>
             <tr>
+            <td>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Fuzzy Logical Relationship</th>
+                </tr>
+                <tr>
+                  <th colspan="2" style="text-align: center;">urutan data</th>
+                  <th colspan="2" style="text-align: center;">Fuzzy Logical Relationship</th>
+                
+                </tr>
+                <tr>
+                <th>Current State</th>
+                <th>Next State</th>
+                <th>Current State</th>
+                <th>Next State</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php //for($i = 0; $i < count($year_month); $i++){ ?>
+                <?php for($i = 0; $i <count($data_setor)-1; $i++){ ?>
+                <tr>
+                <td><?php echo $i+1 ;?></td>
+                <td><?php echo $i+2;?></td>
+                <td>A<?php echo $state1[$i] ?></td>
+                <td>A<?php echo $state2[$i] ?></td>
+                </tr>
+                <?php  } ?>
+              
+              </tbody>
+              </table>
+            </td>
             <td>
             <table class="table table-bordered table-striped">
               <thead>
@@ -242,6 +245,17 @@
               </tbody>
             </table>
             </td>
+            </tr>
+            </thead>
+            </table>
+            </div>
+          <!-- /.box-body -->
+          </div>
+          <div class="x_panel">
+          <div class="box-body">
+            <table class="table">
+            <thead>
+            <tr>
             <td>
             <table class="table table-bordered table-striped">
               <thead>
@@ -297,7 +311,7 @@
               
               </tbody>
             </table>
-            </td>
+          </td>
             </tr>
             </thead>
             </table>
@@ -305,6 +319,7 @@
           <!-- /.box-body -->
           </div>
           
+         
           <div class="x_panel">
           <div class="box-body">
             <table class="table">

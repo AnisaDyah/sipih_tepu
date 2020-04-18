@@ -29,7 +29,7 @@
                 <label>Bulan Yang ingin diramal</label>
                 <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepicker2" placeholder="YYYY-MM-DD">
               </div>
-            
+              <?php if($this->session->userdata('id_user_level') == '1'): ?>
               <div class="form-group">
                 <label>setoran dari Peternak : </label>
                 <select class="form-control select2" name="id_user">
@@ -38,6 +38,7 @@
                   <?php endforeach ?>
                 </select>
               </div>
+              <?php endif; ?>
             
             <div class="box-footer">
               <div class="form-group">
