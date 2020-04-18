@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
               <label for="tgl_setoran">Tanggal Setoran</label>
-              <input type="text" class="form-control" id="tgl_setoran" id="datepicker"name="tgl_setoran" placeholder="(YYYY-MM-DD)">
+              <input type="text" class="form-control"  id="datepicker" name="tgl_setoran" placeholder="(YYYY-MM-DD)">
             </div>
             <div class="form-group">
               <label for="jml_setoran">Jumlah Setoran</label>

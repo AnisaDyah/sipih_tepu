@@ -44,17 +44,16 @@
                     'username' => $this->input->post('username'),
                     'password' => md5($this->input->post('password'))
                 ];
-                $rules = [
-                    [
-                    'field' => 'nama_lengkap',
-                    'label' => 'nama_lengkap',
-                    'rules' => 'trim|required'
-                    ]
-                ];
                 
-                $this->form_validation->set_rules($rules);
+                $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
+                $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+                $this->form_validation->set_rules('privilege', 'ID User Level', 'required');
+                $this->form_validation->set_rules('username', 'Username', 'required|is_unique[user.username]');
+                $this->form_validation->set_rules('password', 'Password', 'required');
+
+                
     
-                if ($this->form_validation->run()) {
+                if ($this->form_validation->run() != false) {
                     $result = $this->Pengguna_model->insert($data);
                     helper_log("add", "menambahkan user");
                     if ($result) {
@@ -62,6 +61,7 @@
                     }
                 } else {
                     redirect('pengguna/create');
+                    
                 }
             
 

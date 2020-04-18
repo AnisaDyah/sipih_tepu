@@ -42,7 +42,13 @@ class Setoran extends CI_Controller {
 
     public function store()
     {
+                $this->form_validation->set_rules('id_user', 'ID User', 'required');
+                $this->form_validation->set_rules('tgl_setoran', 'Tanggal', 'required');
+                $this->form_validation->set_rules('jml_setoran', 'Jumlah', 'required');
+                $this->form_validation->set_rules('harga', 'Harga', 'required');
+                $this->form_validation->set_rules('total', 'Tanggal', 'required');
        
+                if ($this->form_validation->run() != FALSE) {
             $data = [
                 'id_user' => $this->input->post('id_user'),
                 'tgl_setoran' =>date_format(date_create($this->input->post('tgl_setoran')), 'Y-m-d'),
@@ -57,6 +63,9 @@ class Setoran extends CI_Controller {
                 helper_log("add", "menambahkan data setoran telur");
                 redirect('setoran/index'); 
             }
+        }else{
+            redirect('setoran/create');
+        }
         
 
     }
