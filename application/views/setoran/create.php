@@ -5,6 +5,13 @@
                 <div class="container">
           <br/><br/><br/>
           <legend>Tambah Data Setoran</legend>
+          <?php $error=$this->session->flashdata('message');
+                  if($error) {?>
+                  <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <?php echo $error; ?>                    
+                  </div>
+                  <?php }?> 
           <div class="col-xs-12 col-sm-12 col-md-12">
           <?php echo form_open_multipart('setoran/store'); ?>
 

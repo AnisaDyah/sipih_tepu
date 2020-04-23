@@ -64,6 +64,7 @@ class Setoran extends CI_Controller {
                 redirect('setoran/index'); 
             }
         }else{
+            $this->session->set_flashdata('message', 'data harus diisi semua !');
             redirect('setoran/create');
         }
         

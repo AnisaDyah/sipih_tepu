@@ -7,11 +7,6 @@ class Peramalan_model extends CI_Model {
         $query = $this->db->get('user');
         return $query->result();
     }
-    // public function get_setoran_user($id_user)
-    // {
-    //     $query = $this->db->query("SELECT * FROM setoran_telur WHERE id_user = $id_user ")->result();
-    //     return $query;
-    // }
 
     public function get_DataSetoranPerbulanByUser($id_user, $tanggal)
 	{
@@ -27,10 +22,27 @@ class Peramalan_model extends CI_Model {
         $query=$this->db->get();
         return $query->result();
     }
+    public function get_setoran($tgl_awal, $tgl_akhir){
+        $this->db->from('setoran_telur');
+        $this->db->where('tgl_setoran >=',$tgl_awal);
+        $this->db->where('tgl_setoran <=',$tgl_akhir);
+        $query=$this->db->get();
+        return $query->result();
+    }
 
-    // public function histori_admin()
-    //     {
-    //         $query = $this->db->get('histori_log');
-    //         return $query->result();
-    //     }
+    public function get_data_training(){
+        $query = $this->db->query("SELECT DISTINCT tgl_setoran, harga FROM setoran_telur ORDER BY tgl_setoran ASC")->result();
+        return $query;
+    }
+
+    public function get_bulantahun1($bulan_tahun1)
+	{
+        $query = $this->db->query("SELECT tgl_setoran FROM `setoran_telur` WHERE tgl_setoran LIKE '$bulan_tahun1%' order by tgl_setoran  ASC")->result();
+        return $query;
+    }
+    public function get_bybulan($tgl_awal, $tgl_akhir)
+	{
+        $query = $this->db->query("SELECT  DISTINCT tgl_setoran, harga FROM `setoran_telur` WHERE tgl_setoran >='$tgl_awal' AND tgl_setoran <= '$tgl_akhir'  order by tgl_setoran  ASC")->result();
+        return $query;
+    }
 }

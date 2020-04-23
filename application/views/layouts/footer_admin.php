@@ -79,6 +79,28 @@
     
   });
 </script>
+</script>
+    <script>
+  $(function () {
+    var line = new Morris.Line({
+      element: 'line-chart2',
+      resize: true,
+      data: <?php echo $response_databiasa2; ?>,
+      xkey: 'bulan',
+      ykeys: ['data_peramalan'],
+      labels: ['Data Ramalan'],
+      parseTime: false,
+      xLabelAngle: 60,
+      lineColors: ['#3c8dbc', 'red'],
+      hideHover: 'auto'
+    });
+    
+    var 
+    legendItem = $('<br><span></span>').text('Data Ramalan'+' ').css('color', 'red');
+    $('#legend').append(legendItem);
+    
+  });
+</script>
 <script>
          var bar = new Morris.Bar({
           element: 'bar-chart',

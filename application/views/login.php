@@ -35,7 +35,13 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Masukkan Username dan Password</p>
-
+    <?php $error=$this->session->flashdata('message');
+                  if($error) {?>
+                  <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <?php echo $error; ?>                    
+                  </div>
+                  <?php }?> 
     <form action="<?php echo site_url('login/login'); ?>" method="post">
       <div class="form-group has-feedback">
         <input type="text" name="username" class="form-control" placeholder="Username">

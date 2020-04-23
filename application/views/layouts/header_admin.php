@@ -105,9 +105,14 @@ if($this->session->status !== ('Logged'))
                       <li><a href="<?php echo base_url('produk/')?>">Tabel Produk</a></li>
                     </ul>
                   </li> -->
+                  <?php if($this->session->userdata('id_user_level') == '1'): ?>
                   <li>
-                  
                     <a href="<?php echo base_url('peramalan/')?>">
+                    <i class="fa fa-search"></i>Perhitungan Metode</a>
+                  </li>
+                  <?php endif; ?>
+                  <li>
+                    <a href="<?php echo base_url('peramalan/peramalan1')?>">
                     <i class="fa fa-search"></i>Proyeksi Harga</a>
                   </li>
                 </ul>

@@ -14,7 +14,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Pilih Data Training Perhitungan</h2>
+                    <h2>Pilih Jangka Waktu peramalan</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -23,10 +23,10 @@
                   <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <?php echo $error; ?>                    
-                  </div>
+            </div>
                   <?php }?> 
           <!-- /.box-header -->
-          <form role="form" action="<?php echo site_url('peramalan/ramal2') ?>" method="post">
+          <form role="form" action="<?php echo site_url('peramalan/peramalan2') ?>" method="post">
             <div class="box-body">
               <div class="form-group">
                 <label>Bulan Awal</label>
@@ -36,20 +36,8 @@
                 <label>Bulan Akhir</label>
                 <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepicker2" placeholder="YYYY-MM-DD">
               </div>
-               <!-- /.box-body -->
-          </div>
-              </div>
-              </div>
               
-              <div class="x_panel">
-              <div class="x_content">
-          <!-- /.box-header -->
-            <div class="box-body">
-              <div class="form-group">
-                <label>Pilih bulan yang akan di ramal</label>
-                <input type="text" name="tgl_ramal" class="form-control pull-right" id="datepicker2" placeholder="YYYY-MM-DD">
-              </div>
-
+            
             <div class="box-footer">
               <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -41,7 +41,7 @@
                 <?php foreach($data_setor as $row){ ?>
                 <tr>
                   <td><?php echo $row->tgl_setoran ?></td>
-                  <td><?php echo $row->harga ?></td>
+                  <td><?php echo "Rp. ".number_format("$row->harga",2,",",".") ?></td>
            
                 </tr>
               <?php } ?>
@@ -67,7 +67,7 @@
                 <?php for($i = 0; $i <count($data_setor); $i++){ ?>
                 <tr>
                 <td><?php echo $i+1;?></td>
-                <td><?php echo $harga[$i];?></td>
+                <td><?php echo "Rp. ".number_format("$harga[$i]",2,",",".");?></td>
                 <td>U<?php echo $Fz[$i] ?></td>
                 <td>A<?php echo $Fz[$i] ?></td>
                 </tr>
@@ -292,7 +292,7 @@
                       if(($i) % $kolom== 1) {    
                       echo'<tr>';   
                       }  
-                      echo '<th ralign="center" width="300px"><b>'.$trik[$m][$j].'</b></th>';
+                      echo '<th ralign="center" width="300px"><b>'.round($trik[$m][$j],2).'</b></th>';
                       if(($i) % $kolom== 0) {    
                       echo'</tr>';    
                       }
@@ -347,10 +347,10 @@
                 <tr>
                 <td><?php echo $i+1 ?></td>
                 <td><?php echo $tgl_setor[$i] ; ?></td>
-                <td><?php echo $harga[$i] ?></td>
-                <td><?php echo $Ft[$i] ?></td>
-                <td><?php echo $Dt[$i] ?></td>
-                <td><?php echo $Ft[$i]+$Dt[$i] ?></td>
+                <td><?php echo "Rp. ".number_format("$harga[$i]",2,",",".") ?></td>
+                <td><?php echo "Rp. ".number_format(round($Ft[$i],2),2,",",".") ?></td>
+                <td><?php echo "Rp. ".number_format($Dt[$i],2,",",".") ?></td>
+                <td><?php echo "Rp. ".number_format(round($Ft[$i]+$Dt[$i],2),2,",",".") ?></td>
                 </tr>
                   <?php } ?>
               </tbody>
@@ -373,15 +373,15 @@
                 <?php for($i = 0; $i <count($data_setor); $i++){ ?> 
                 <tr>
                 <td><?php echo $i+1 ?></td>
-                <td><?php echo $mape[$i]."%" ; ?></td>
-                <td><?php echo $mse[$i] ?></td>
+                <td><?php echo abs(round($mape[$i],2))."%" ; ?></td>
+                <td><?php echo round($mse[$i],2) ?></td>
                 
                 </tr>
                   <?php } ?>
                   <tr>
                   <td>Total : </td>
-                  <td><?php echo $total_mape/count($data_setor) ?> </td>
-                  <td><?php echo $total_mse/count($data_setor) ?> </td>
+                  <td><?php echo round($total_mape/count($data_setor),2) ?> </td>
+                  <td><?php echo round($total_mse/count($data_setor),2) ?> </td>
                   </tr>
               </tbody>
             </table>
@@ -412,9 +412,9 @@
               
                 <?php for($i = 0; $i <8; $i++){ ?> 
                 <tr>
-                <!-- <td><?php echo $i+1 ?></td> -->
-                <td><?php echo "mingu ke-".$i ; ?></td>
-                <td><?php echo $ftend_new[$i] ?></td>
+                <!-- <td><?php $x=$i+1; echo $x ?></td> -->
+                <td><?php $x=$i+1; echo "mingu ke-".$x ; ?></td>
+                <td><?php echo "Rp. ".number_format(round($ftend_new[$i],2),2,",",".") ?></td>
                 
                 </tr>
                   <?php } ?>

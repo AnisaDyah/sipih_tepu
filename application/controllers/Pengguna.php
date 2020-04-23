@@ -60,6 +60,7 @@
                         redirect('pengguna');
                     }
                 } else {
+                    $this->session->set_flashdata('message', 'data harus diisi semua');
                     redirect('pengguna/create');
                     
                 }
