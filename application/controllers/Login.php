@@ -42,6 +42,11 @@ class Login extends CI_Controller {
         }
     }
 
+    public function admin_index()
+    { 
+        $this->load->view('admin/index');
+    }
+
     public function logout()
     { 
         $this->session->sess_destroy();

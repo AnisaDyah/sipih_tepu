@@ -68,51 +68,46 @@ if($this->session->status !== ('Logged'))
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo base_url() ?>admin"><i class="fa fa-home"></i> Home </a></li>
+                  <li><a href="<?php echo base_url('Login/admin_index') ?>"><i class="fa fa-home"></i> Home </a></li>
                   <?php if($this->session->userdata('id_user_level') == '1'): ?>
                   <li><a><i class="fa fa-edit"></i> User <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                    
-                      <li><a href="<?php echo base_url('pengguna/create')?>">Tambah User</a></li>
-                      <li><a href="<?php echo base_url('pengguna/')?>">List User</a></li>
+                      <li><a href="<?php echo base_url('Pengguna/create')?>">Tambah User</a></li>
+                      <li><a href="<?php echo base_url('Pengguna/')?>">List User</a></li>
                     </ul>
                   </li>
                   <?php endif; ?>
                   <?php if($this->session->userdata('id_user_level') == '1'): ?>
                   <li><a><i class="fa fa-edit"></i> Setoran Telur <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('setoran/create')?>">Tambah Setoran</a></li>
-                      <li><a href="<?php echo base_url('setoran/')?>">Setoran</a></li>
-                      <li><a href="<?php echo base_url('setoran/tabel')?>">Tabel Setoran</a></li>
-                      <li><a href="<?php echo base_url('setoran/grafik_admin')?>">Grafik Setoran</a></li>
-                      <li><a href="<?php echo base_url('laporan/')?>">Cetak Laporan</a></li>
+                      <li><a href="<?php echo base_url('Setoran/create')?>">Tambah Setoran</a></li>
+                      <li><a href="<?php echo base_url('Setoran/')?>">Setoran</a></li>
+                      <li><a href="<?php echo base_url('Setoran/tabel')?>">Tabel Setoran</a></li>
+                      <li><a href="<?php echo base_url('Setoran/grafik_admin')?>">Grafik Setoran</a></li>
+                      <li><a href="<?php echo base_url('Laporan/')?>">Cetak Laporan</a></li>
                     </ul>
                   </li>
                   <?php endif; ?>
                   <?php if($this->session->userdata('id_user_level') == '2'): ?>
                   <li><a><i class="fa fa-edit"></i> Setoran Telur <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('setoran/setoran_user')?>">Setoran</a></li>
-                      <li><a href="<?php echo base_url('setoran/cari_setoran')?>">Grafik Setoran</a></li>
-                      <li><a href="<?php echo base_url('laporan/')?>">Cetak Laporan</a></li>
+                      <li><a href="<?php echo base_url('Setoran/setoran_user')?>">Setoran</a></li>
+                      <li><a href="<?php echo base_url('Setoran/cari_setoran')?>">Grafik Setoran</a></li>
+                      <li><a href="<?php echo base_url('Laporan/')?>">Cetak Laporan</a></li>
                     </ul>
                    
                   </li>
                   <?php endif; ?>
-                  <!-- <li><a><i class="fa fa-edit"></i> Produk <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url('produk/create')?>">Form Produk</a></li>
-                      <li><a href="<?php echo base_url('produk/')?>">Tabel Produk</a></li>
-                    </ul>
-                  </li> -->
+                 
                   <?php if($this->session->userdata('id_user_level') == '1'): ?>
                   <li>
-                    <a href="<?php echo base_url('peramalan/')?>">
+                    <a href="<?php echo base_url('Peramalan/')?>">
                     <i class="fa fa-search"></i>Perhitungan Metode</a>
                   </li>
                   <?php endif; ?>
                   <li>
-                    <a href="<?php echo base_url('peramalan/peramalan1')?>">
+                    <a href="<?php echo base_url('Peramalan/peramalan1')?>">
                     <i class="fa fa-search"></i>Proyeksi Harga</a>
                   </li>
                 </ul>

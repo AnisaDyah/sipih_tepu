@@ -125,7 +125,7 @@ class Setoran extends CI_Controller {
           'tahun' => $setoran,
           'user' => $this->Setoran_model->get_user()
         ];
-        $this->load->view('setoran/tabel_setoran', $data);
+        $this->load->view('setoran/setoran_tabel', $data);
       }
 
     public function tabel_setoran(){
@@ -230,6 +230,30 @@ class Setoran extends CI_Controller {
             helper_log("validasi", "user telah validasi data setoran");
             redirect('setoran/setoran_user','refresh');
         }
+
+        public function setoran_tabel(){
+     
+            $id_user=$this->input->post('id_user');
+            $tahun=$this->input->post('tahun');
+            $this->load->model('Setoran_model');
+            $setoran = $this->Setoran_model->setoran_tabel($id_user,$tahun);
+            
+            if($this->Setoran_model->setoran_tabel($id_user,$tahun)){
+               
+              $data = [
+                'tahun' => $this->Setoran_model->tahun(),
+              'setoran' => $setoran,
+              'user' => $this->Setoran_Model->get_user()
+            ];
+            
+            $this->load->view('setoran/setoran_tabel', $data);
+        } else {
+            $this->session->set_flashdata('message', 'data tidak ditemukan !');
+            redirect('setoran/tabel');
+          }
+         
+         
+          }
 
     
 

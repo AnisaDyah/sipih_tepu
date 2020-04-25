@@ -125,7 +125,15 @@ class Setoran_model extends CI_Model {
 		$this->db->where('tgl_setoran BETWEEN "'.$tgl_awal.'" AND "'.$tgl_akhir.'"');
 		$this->db->order_by('tgl_setoran', 'ASC');
 		return $this->db->get('setoran_telur')->result();
-	}
+    }
+    
+    public function setoran_tabel($id_user, $tahun)
+        {
+         
+            $query = $this->db->query("SELECT * FROM setoran_telur
+              WHERE YEAR(tgl_setoran)='$tahun' AND id_user='$id_user' ORDER BY tgl_setoran ASC")->result();
+            return $query;
+        }
 
 }
 
