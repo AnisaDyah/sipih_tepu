@@ -52,8 +52,25 @@
       format: 'yyyy-mm-dd'
     })
 
+    $('#datepicker3').datepicker({
+      autoclose: true,
+      format: 'yyyy-mm-dd'
+    })
+
     //Date picker Bulan
-   
+    $('#datepickerbulan').datepicker({
+      autoclose: true,
+      format: 'M yyyy'
+    })
+
+    $('#datepickerbulan2').datepicker({
+      autoclose: true,
+      format: 'M yyyy'
+    })
+    $('#datepickerbulan3').datepicker({
+      autoclose: true,
+      format: 'M yyyy'
+    })
 
     
   })</script>

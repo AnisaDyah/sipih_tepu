@@ -35,6 +35,11 @@ class Peramalan_model extends CI_Model {
         return $query;
     }
 
+    public function get_data_training2($awalawal){
+        $query = $this->db->query("SELECT DISTINCT tgl_setoran, harga FROM setoran_telur WHERE tgl_setoran <='$awalawal' ORDER BY tgl_setoran ASC")->result();
+        return $query;
+    }
+
     public function get_bulantahun1($bulan_tahun1)
 	{
         $query = $this->db->query("SELECT tgl_setoran FROM `setoran_telur` WHERE tgl_setoran LIKE '$bulan_tahun1%' order by tgl_setoran  ASC")->result();

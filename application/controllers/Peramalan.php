@@ -26,17 +26,36 @@ class Peramalan extends CI_Controller {
     {
         
         $tgl_awal=date_format(date_create($this->input->post('tgl_awal')), 'Y-m-d');
+        $bulan_awal=substr($tgl_awal,5,2);
+        $tahun_awal=substr($tgl_awal,0,4);
+
         $tgl_akhir=date_format(date_create($this->input->post('tgl_akhir')), 'Y-m-d');
+        $bulan_akhir=substr($tgl_akhir,5,2);
+        $tahun_akhir=substr($tgl_akhir,0,4);
+
         $tgl_ramal=date_format(date_create($this->input->post('tgl_ramal')), 'Y-m-d');
-        $bulan_awal=substr($tgl_akhir,5,2);
-        $bulan_akhir=substr($tgl_ramal,5,2);
-        $jangka_waktu=($bulan_akhir-$bulan_awal)*4;
+        $bulan_ramal=substr($tgl_ramal,5,2);
+        $tahun_ramal=substr($tgl_ramal,0,4);
+       
+       if(($tahun_ramal-$tahun_akhir) == 0){
+            $jangka_waktu=(($bulan_ramal-$bulan_akhir)+1)*4;
+            $bulan = ($bulan_ramal-$bulan_akhir)+1;
+       }else if(($tahun_ramal-$tahun_akhir) > 0){
+            $jangka_waktu=(($bulan_ramal+(12-$bulan_akhir))+1)*4;
+            $bulan = ($bulan_ramal+(12-$bulan_akhir))+1;
+       }else if(($tahun_ramal-$tahun_akhir)< 0){
+        $this->session->set_flashdata('message', 'Invalid Input');
+        redirect('peramalan/');
+       }
+        
+        
         $bulan_tahun1=substr($tgl_akhir,0,7);
         $harga=array();
         $response_databiasa = array();
         echo var_dump($jangka_waktu);
         
         //mengambil data yang akan diramal
+        if(($tahun_akhir-$tahun_awal) >= 0){
         if($this->Peramalan_model->get_bulantahun1($bulan_tahun1)){
             $data_setor = $this->Peramalan_model->get_bybulan($tgl_awal, $tgl_akhir);
             $harga=array();
@@ -359,11 +378,14 @@ class Peramalan extends CI_Controller {
         }
         $data['response_databiasa']=json_encode($response_databiasa);
         $data['ftend_new']=$ftend_new;
+        $data['bulan']=$bulan;
+        $data['jangka_waktu']=$jangka_waktu;
         //echo var_dump($data_setor);
 
             $this->load->view('peramalan/ramal2',$data);
     
-        }else{
+        }
+    }else{
             $this->session->set_flashdata('message', 'data training tidak ditemukan');
             redirect('peramalan/');
         }
@@ -377,21 +399,34 @@ class Peramalan extends CI_Controller {
 
         public function peramalan2()
         {
-            $awalawal = explode("-", date_format(date_create($this->input->post('tgl_awal')), 'Y-m-d'));
-            $akhirakhir = explode("-", date_format(date_create($this->input->post('tgl_akhir')), 'Y-m-d'));
-            $tahun_awal = $awalawal[0];
-            $bulan_awal = $awalawal[1];
-            $tahun_akhir = $akhirakhir[0];
-            $bulan_akhir = $akhirakhir[1];
-            $response_databiasa2 = array();
+            $tgl_awal=date_format(date_create($this->input->post('tgl_awal')), 'Y-m-d');
+            $bulan_awal=substr($tgl_awal,5,2);
+            $tahun_awal=substr($tgl_awal,0,4);
 
+            $tgl_akhir=date_format(date_create($this->input->post('tgl_akhir')), 'Y-m-d');
+            $bulan_akhir=substr($tgl_akhir,5,2);
+            $tahun_akhir=substr($tgl_akhir,0,4);
+           
+            $response_databiasa2 = array();
             $bulan_tahun1=$tahun_awal."-".$bulan_awal;
-            $jangka_waktu=($bulan_akhir-$bulan_awal)*4;
-            $x=$this->Peramalan_model->get_bulantahun1($bulan_tahun1);
+
+            if(($tahun_akhir-$tahun_awal) == 0){
+                $jangka_waktu=(($bulan_akhir-$bulan_awal)+1)*4;
+                $bulan = ($bulan_akhir-$bulan_awal)+1;
+           }else if(($tahun_akhir-$tahun_awal) > 0){
+                $jangka_waktu=(($bulan_akhir+(12-$bulan_awal))+1)*4;
+                $bulan = ($bulan_akhir+(12-$bulan_awal))+1;
+           }else if(($tahun_akhir-$tahun_awal)< 0){
+            $this->session->set_flashdata('message', 'Invalid Input');
+            redirect('peramalan/peramalan1');
+           }
+
+      
             //echo var_dump($jangka_waktu);
             if($this->Peramalan_model->get_bulantahun1($bulan_tahun1)){
             //mengambil data yang akan diramal
-            $data_setor = $this->Peramalan_model->get_data_training();
+            $data_setor = $this->Peramalan_model->get_data_training2($tgl_awal);
+            
             $harga=array();
             $tgl_setor=array();
             foreach($data_setor as $key){
@@ -680,6 +715,7 @@ class Peramalan extends CI_Controller {
                 $data['response_databiasa2']=json_encode($response_databiasa2);
                 $data['jangka_waktu']=$jangka_waktu;
                 $data['ftend_new']=$ftend_new;
+                $data['bulan']=$bulan;
                 //echo var_dump($response_databiasa);
                 $this->load->view('Peramalan/peramalan2',$data);
             }else{

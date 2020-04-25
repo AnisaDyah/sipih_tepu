@@ -22,7 +22,7 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90">Peramalan 2 bulan kedepan</th>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90"> <?php echo "Peramalan ".$bulan." Bulan Kedepan"?></th>
                 </tr>
                 <tr>
                 <!-- <th>t</th> -->

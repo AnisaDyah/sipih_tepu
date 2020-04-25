@@ -400,7 +400,7 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90">Peramalan 2 bulan kedepan</th>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90"><?php echo "Peramalan ".$bulan." Bulan Kedepan"?></th>
                 </tr>
                 <tr>
                 <!-- <th>t</th> -->
@@ -410,7 +410,7 @@
               </thead>
               <tbody>
               
-                <?php for($i = 0; $i <8; $i++){ ?> 
+                <?php for($i = 0; $i <$jangka_waktu; $i++){ ?> 
                 <tr>
                 <!-- <td><?php $x=$i+1; echo $x ?></td> -->
                 <td><?php $x=$i+1; echo "mingu ke-".$x ; ?></td>
