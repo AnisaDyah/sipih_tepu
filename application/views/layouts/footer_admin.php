@@ -123,8 +123,8 @@
           element: 'bar-chart',
           data: <?php echo $setoran_chart;?>,
           xkey: 'nama_peternak',
-          ykeys: ['jml_setor'],
-          labels: ['Jumlah setoran'],
+          ykeys: ['jml_setor','jml_setor2'],
+          labels: ['2018','2019'],
         });
 </script>
 <script>

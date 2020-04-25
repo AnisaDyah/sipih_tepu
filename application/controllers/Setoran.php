@@ -176,10 +176,13 @@ class Setoran extends CI_Controller {
     function grafik_admin(){
         $setoran_chart=array();
         $this->load->model('M_grafik');
-        $setoran=$this->M_grafik->get_data_stok();
+        $setoran=$this->M_grafik->get_data_stok_bytahun();
         $user=$this->Pengguna_model->list();
         foreach($setoran as $key){
-            $jml_setor[]=$key->jml_setoran;
+        
+            $jml_setor[]=$key->jml_setoran1;
+            $jml_setor2[]=$key->jml_setoran2;
+            
             foreach($user as $var){
                 if($key->id_user == $var->id_user){
                     $nama_peternak[]=$var->nama_lengkap;
@@ -189,7 +192,8 @@ class Setoran extends CI_Controller {
         }
         for ($i=0; $i < count($nama_peternak); $i++) {
             array_push($setoran_chart, array(
-				"jml_setor"=>$jml_setor[$i],
+                "jml_setor"=>round($jml_setor[$i],2),
+                "jml_setor2"=>round($jml_setor2[$i],2),
                 "nama_peternak"=>$nama_peternak[$i],
                 "id_user"=>$id_user[$i],
 				)
