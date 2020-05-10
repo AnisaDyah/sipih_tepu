@@ -29,12 +29,12 @@
           <form role="form" action="<?php echo site_url('peramalan/peramalan2') ?>" method="post">
             <div class="box-body">
               <div class="form-group">
-                <label>Bulan Awal</label>
-                <input type="text" name="tgl_awal" class="form-control pull-right" id="datepickerbulan" placeholder="Pilih Bulan Awal yang Akan Diramal">
+                <label>Tanggal Awal</label>
+                <input type="text" name="tgl_awal" class="form-control pull-right" id="datepicker" placeholder="Pilih Bulan Awal yang Akan Diramal" required>
               </div>
               <div class="form-group">
-                <label>Bulan Akhir</label>
-                <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepickerbulan2" placeholder="Pilih Bulan Awal yang Akan Diramal">
+                <label>Tanggal Akhir</label>
+                <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepicker2" placeholder="Pilih Bulan Awal yang Akan Diramal" required>
               </div>
               
             

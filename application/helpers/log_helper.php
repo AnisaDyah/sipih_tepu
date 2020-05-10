@@ -21,8 +21,10 @@ function helper_log($tipe = "", $str = ""){
     elseif(strtolower($tipe) == "validasi"){
         $log_tipe  = 5;
     }
-    else{
+    elseif(strtolower($tipe) == "peramalan"){
         $log_tipe  = 6;
+    }else{
+        $log_tipe  = 7;
     }
  
     // paramter

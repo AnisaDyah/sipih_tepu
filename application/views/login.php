@@ -7,15 +7,13 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/assets_login/bower_components/bootstrap/dist/css/bootstrap.min.css')?>">
+  <link href="<?php echo base_url('assets/vendors/bootstrap/dist/css/bootstrap.min.css')?>" rel="stylesheet">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/assets_login/bower_components/font-awesome/css/font-awesome.min.css') ?>">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/assets_login/bower_components/Ionicons/css/ionicons.min.css') ?>">
+  <link href="<?php echo base_url('assets/vendors/font-awesome/css/font-awesome.min.css')?>" rel="stylesheet">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url('assets/assets_login/dist/css/AdminLTE.min.css') ?>">
   <!-- iCheck -->
-  <link rel="stylesheet" href="<<?php echo base_url('assets/assets_login/plugins/iCheck/square/blue.css') ?>">
+  <link href="<?php echo base_url('assets/vendors/iCheck/skins/flat/green.css')?>" rel="stylesheet">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -71,11 +69,11 @@
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->
-<script src="<?php echo site_url('assets/'); ?>bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url('assets/vendors/jquery/dist/jquery.min.js')?>"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="<?php echo site_url('assets/'); ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<link href="<?php echo base_url('assets/vendors/bootstrap/dist/css/bootstrap.min.css')?>" rel="stylesheet">
 <!-- iCheck -->
-<script src="<?php echo site_url('assets/'); ?>plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo base_url('assets/vendors/iCheck/icheck.min.js')?>"></script>
 <script>
   $(function () {
     $('input').iCheck({

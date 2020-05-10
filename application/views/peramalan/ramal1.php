@@ -30,11 +30,11 @@
             <div class="box-body">
               <div class="form-group">
                 <label>Bulan Awal</label>
-                <input type="text" name="tgl_awal" class="form-control pull-right" id="datepickerbulan" placeholder="Pilih Bulan Awal Data yang Akan Dihitung">
+                <input type="text" name="tgl_awal" class="form-control pull-right" id="datepicker" placeholder="Pilih Bulan Awal Data yang Akan Dihitung" required>
               </div>
               <div class="form-group">
                 <label>Bulan Akhir</label>
-                <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepickerbulan2" placeholder="Pilih Bulan Akhir Data yang Akan Dihitung">
+                <input type="text" name="tgl_akhir" class="form-control pull-right" id="datepicker2" placeholder="Pilih Bulan Akhir Data yang Akan Dihitung" required>
               </div>
                <!-- /.box-body -->
           </div>
@@ -47,7 +47,7 @@
             <div class="box-body">
               <div class="form-group">
                 <label>Pilih bulan yang akan di ramal</label>
-                <input type="text" name="tgl_ramal" class="form-control pull-right" id="datepickerbulan3" placeholder="Pilih Bulan yang Akan Diramal">
+                <input type="text" name="tgl_ramal" class="form-control pull-right" id="datepicker3" placeholder="Pilih Bulan yang Akan Diramal" required>
               </div>
 
             <div class="box-footer">

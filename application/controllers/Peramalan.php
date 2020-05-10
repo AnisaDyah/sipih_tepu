@@ -37,22 +37,68 @@ class Peramalan extends CI_Controller {
         $bulan_ramal=substr($tgl_ramal,5,2);
         $tahun_ramal=substr($tgl_ramal,0,4);
        
-       if(($tahun_ramal-$tahun_akhir) == 0){
-            $jangka_waktu=(($bulan_ramal-$bulan_akhir)+1)*4;
-            $bulan = ($bulan_ramal-$bulan_akhir)+1;
-       }else if(($tahun_ramal-$tahun_akhir) > 0){
-            $jangka_waktu=(($bulan_ramal+(12-$bulan_akhir))+1)*4;
-            $bulan = ($bulan_ramal+(12-$bulan_akhir))+1;
-       }else if(($tahun_ramal-$tahun_akhir)< 0){
-        $this->session->set_flashdata('message', 'Invalid Input');
-        redirect('peramalan/');
-       }
+    //    if(($tahun_ramal-$tahun_akhir) == 0){
+    //         $jangka_waktu=(($bulan_ramal-$bulan_akhir)+1)*4;
+    //         $bulan = ($bulan_ramal-$bulan_akhir)+1;
+    //    }else if(($tahun_ramal-$tahun_akhir) > 0){
+    //         $jangka_waktu=(($bulan_ramal+(12-$bulan_akhir))+1)*4;
+    //         $bulan = ($bulan_ramal+(12-$bulan_akhir))+1;
+    //    }else if(($tahun_ramal-$tahun_akhir)< 0){
+    //     $this->session->set_flashdata('message', 'Invalid Input');
+    //     redirect('peramalan/');
+    //    }
+            $minggu_awal=$this->Peramalan_model->get_minggu($tgl_akhir);
+            $minggu_akhir=$this->Peramalan_model->get_minggu($tgl_ramal);
+
+            $week_awal = $minggu_awal['mingguke'];
+            $week_akhir = $minggu_akhir['mingguke']; 
+
+           
+
+            if(($tahun_ramal-$tahun_akhir) == 0){
+                $jangka_waktu=($week_akhir-$week_awal+1);
+                for($i=0;$i<$jangka_waktu;$i++){    
+                    $week[$i]=($week_awal)+$i;
+                    $year=$tahun_akhir;
+                    $date1[$i] = date( "d F Y", strtotime($year."W".$week[$i]."1") ); // First day of week
+                    $date2[$i] = date( "d F Y", strtotime($year."W".$week[$i]."7") ); // Last day of week
+
+                    $rangeminggu[$i]=$date1[$i] . " - " . $date2[$i];
+                }
+                $bulan = ($bulan_akhir-$bulan_awal);
+           }else if(($tahun_ramal-$tahun_akhir) > 0){
+                $jangka_waktu=($week_akhir+(52-$week_awal))+1;
+                for($i=0;$i<$jangka_waktu;$i++){
+                    $x=(52-$week_awal)+1;
+                    if($i <= $x){
+                        $week[$i]=($week_awal)+$i;
+                        $year=$tahun_akhir;
+                        $date1[$i] = date( "d F Y", strtotime($year."W".$week[$i]."1") ); // First day of week
+                        $date2[$i] = date( "d F Y", strtotime($year."W".$week[$i]."7") ); // Last day of week
+                    }else{
+                        //for($j=1;$j<=$i;$j++){
+                        $week1[$i]=$i-($week_akhir-1);
+                        $text[$i]=(string)$week1[$i];
+                        $qwe[$i]="0".$text[$i];
+                        $year=$tahun_ramal;
+                        $date1[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."1") ); // First day of week
+                        $date2[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."7") ); // Last day of week
+                        //}
+                    }
+                    
+                    $rangeminggu[$i]=$date1[$i] . " - " . $date2[$i];
+                }
+                $bulan = $bulan_akhir+(12-$bulan_awal);
+           }else if(($tahun_ramal-$tahun_akhir)< 0){
+            $this->session->set_flashdata('message', 'Invalid Input');
+            redirect('peramalan/peramalan1');
+           }
         
         
         $bulan_tahun1=substr($tgl_akhir,0,7);
         $harga=array();
         $response_databiasa = array();
-        echo var_dump($jangka_waktu);
+        echo var_dump($week_awal);
         
         //mengambil data yang akan diramal
         if(($tahun_akhir-$tahun_awal) >= 0){
@@ -380,8 +426,9 @@ class Peramalan extends CI_Controller {
         $data['ftend_new']=$ftend_new;
         $data['bulan']=$bulan;
         $data['jangka_waktu']=$jangka_waktu;
+        $data['rangeminggu']=$rangeminggu;
         //echo var_dump($data_setor);
-
+            helper_log("peramalan", "melakukan peramalan dengan perhitungan");
             $this->load->view('peramalan/ramal2',$data);
     
         }
@@ -390,7 +437,7 @@ class Peramalan extends CI_Controller {
             redirect('peramalan/');
         }
     }
-
+//peramalan tanpa perhitungan-------------------------------------------------------------------------------
         public function peramalan1()
         {
             
@@ -407,31 +454,87 @@ class Peramalan extends CI_Controller {
             $bulan_akhir=substr($tgl_akhir,5,2);
             $tahun_akhir=substr($tgl_akhir,0,4);
            
-            $response_databiasa2 = array();
-            $bulan_tahun1=$tahun_awal."-".$bulan_awal;
+            $datenow= date('Y-m-d');
+            $minggu_awal=$this->Peramalan_model->get_minggu($tgl_awal);
+            $minggu_akhir=$this->Peramalan_model->get_minggu($tgl_akhir);
+
+            $week_awal = $minggu_awal['mingguke'];
+            $week_akhir = $minggu_akhir['mingguke']; 
+
+           
 
             if(($tahun_akhir-$tahun_awal) == 0){
-                $jangka_waktu=(($bulan_akhir-$bulan_awal)+1)*4;
-                $bulan = ($bulan_akhir-$bulan_awal)+1;
+                $jangka_ramal=($week_akhir-$week_awal+1);
+                for($i=0;$i<$jangka_ramal;$i++){
+                    $week[$i]=($week_awal)+$i;
+                    $year=$tahun_awal;
+                    $date1[$i] = date( "d F Y", strtotime($year."W".$week[$i]."1") ); // First day of week
+                    $date2[$i] = date( "d F Y", strtotime($year."W".$week[$i]."7") ); // Last day of week
+
+                    $rangeminggu[$i]=$date1[$i] . " - " . $date2[$i];
+                }
+                $bulan = ($bulan_akhir-$bulan_awal);
            }else if(($tahun_akhir-$tahun_awal) > 0){
-                $jangka_waktu=(($bulan_akhir+(12-$bulan_awal))+1)*4;
-                $bulan = ($bulan_akhir+(12-$bulan_awal))+1;
+                $jangka_ramal=($week_akhir+(52-$week_awal))+2;
+                for($i=0;$i<$jangka_ramal;$i++){
+                    $x=(52-$week_awal)+1;
+                    if($i <= $x){
+                        $week[$i]=($week_awal)+$i;
+                        $year=$tahun_awal;
+                        $date1[$i] = date( "d F Y", strtotime($year."W".$week[$i]."1") ); // First day of week
+                        $date2[$i] = date( "d F Y", strtotime($year."W".$week[$i]."7") ); // Last day of week
+                    }else{
+                        //for($j=1;$j<=$i;$j++){
+                        $week1[$i]=$i-($week_akhir-1);
+                        $text[$i]=(string)$week1[$i];
+                        $qwe[$i]="0".$text[$i];
+                        $year=$tahun_akhir;
+                        $date1[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."1") ); // First day of week
+                        $date2[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."7") ); // Last day of week
+                        //}
+                    }
+                    
+                    $rangeminggu[$i]=$date1[$i] . " - " . $date2[$i];
+                }
+                $bulan = $bulan_akhir+(12-$bulan_awal);
            }else if(($tahun_akhir-$tahun_awal)< 0){
             $this->session->set_flashdata('message', 'Invalid Input');
             redirect('peramalan/peramalan1');
            }
 
-      
-            //echo var_dump($jangka_waktu);
-            if($this->Peramalan_model->get_bulantahun1($bulan_tahun1)){
-            //mengambil data yang akan diramal
-            $data_setor = $this->Peramalan_model->get_data_training2($tgl_awal);
+         
+           echo var_dump($week_awal);
             
-            $harga=array();
-            $tgl_setor=array();
-            foreach($data_setor as $key){
-                $harga[] = $key->harga;
-                $tgl_setor[]=$key->tgl_setoran;
+            $response_databiasa2 = array();
+
+    if($tgl_awal >= $datenow){
+        if($tgl_akhir >= $tgl_awal){
+          //mengambil data yang akan diramal
+          $data_setor = $this->Peramalan_model->get_data_training();
+          $harga=array();
+          $tgl_setor=array();
+          foreach($data_setor as $key){
+              $harga[] = $key->harga;
+              $tgl_setor[]=$key->tgl_setoran;
+          }
+          $tgl_last_data=$tgl_setor[count($data_setor)-1];
+          $minggu_last_data=$this->Peramalan_model->get_minggu($tgl_last_data);
+          $week_last_data = $minggu_last_data['mingguke'];
+          $tahun_last_data=substr($tgl_last_data,0,4);
+
+          //mencari nilai jangka waktu peramalan
+          if(($tahun_akhir-$tahun_last_data) == 0){
+                    $jangka_waktu=($week_akhir-$week_last_data)+1;
+                    $bulan = ($bulan_akhir-$bulan_awal);
+            }else if(($tahun_akhir-$tahun_last_data) == 1){
+                    $jangka_waktu=($week_akhir+(52-$week_last_data))+2;
+                    $bulan = $bulan_akhir+(12-$bulan_awal);
+            }else if(($tahun_akhir-$tahun_last_data) == 2){
+                    $jangka_waktu=($week_akhir+(104-$week_last_data))+2;
+                    $bulan = $bulan_akhir+(12-$bulan_awal);
+            }else if(($tahun_akhir-$tahun_last_data)< 0){
+                $this->session->set_flashdata('message', 'Invalid Input');
+                redirect('peramalan/peramalan1');
             }
         //mencari nilai dmin dan d max
             $dmax=max($harga);
@@ -705,21 +808,35 @@ class Peramalan extends CI_Controller {
 
                 //peramalan akhir
                 $ftend_new[$i]=$Ft_new[$i]+$Dt_new[$i]; 
-                $bulan_setor[$i]="minggu ke-".$i;
+                
+               
+            }
+            for($i = 0; $i <$jangka_ramal; $i++){
+                $bulan_setor[$i]="minggu ke-".($i+1);
                 array_push($response_databiasa2, array(
                     "bulan"=>$bulan_setor[$i],
-                    "data_peramalan"=>round($ftend_new[$i],2),
+                    "data_peramalan"=>round($ftend_new[$week_awal+$i],2),
                     )
                 );
             }
+            
+            
                 $data['response_databiasa2']=json_encode($response_databiasa2);
                 $data['jangka_waktu']=$jangka_waktu;
                 $data['ftend_new']=$ftend_new;
                 $data['bulan']=$bulan;
+                $data['rangeminggu']=$rangeminggu;
+                $data['week_awal']=$week_awal;
+                $data['jangka_ramal']=$jangka_ramal;
                 //echo var_dump($response_databiasa);
+                helper_log("peramalan", "melakukan peramalan tanpa perhitungan");
                 $this->load->view('Peramalan/peramalan2',$data);
+            }  else{
+                $this->session->set_flashdata('message', 'Invalid Input');
+                redirect('peramalan/peramalan1');
+            }
             }else{
-                $this->session->set_flashdata('message', 'data training tidak ditemukan');
+                $this->session->set_flashdata('message', 'Invalid Input');
                 redirect('peramalan/peramalan1');
             }
         }

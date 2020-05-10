@@ -50,4 +50,11 @@ class Peramalan_model extends CI_Model {
         $query = $this->db->query("SELECT  DISTINCT tgl_setoran, harga FROM `setoran_telur` WHERE tgl_setoran >='$tgl_awal' AND tgl_setoran <= '$tgl_akhir'  order by tgl_setoran  ASC")->result();
         return $query;
     }
+
+    public function get_minggu($tanggal)
+	{
+        $query = $this->db->query("SELECT WEEK('$tanggal',1) as mingguke")->row_array();
+        return $query;
+    }
+    
 }

@@ -14,7 +14,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Rincian Perhitungan dengan Metode Fuzzy Time Series Markov Chain</h2>
+                    <h2><b>Peramalan Harga Telur Puyuh dengan Metode Fuzzy Time Series Markov Chain</b></h2>
                     <div class="clearfix"></div>
                   </div>
              
@@ -22,21 +22,22 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90"> <?php echo "Peramalan ".$bulan." Bulan Kedepan"?></th>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90"> <?php echo "Peramalan ".$jangka_ramal." Minggu Kedepan"?></th>
                 </tr>
                 <tr>
                 <!-- <th>t</th> -->
-                  <th>bulan</th>
-                  <th>peramalan</th>
+                  <th width='10%'>No Minggu</th>
+                  <th>Jangka Waktu</th>
+                  <th>Harga Hasil Peramalan</th>
                 </tr>
               </thead>
               <tbody>
               
-                <?php for($i = 0; $i <$jangka_waktu; $i++){ ?> 
+                <?php for($i = 0; $i <$jangka_ramal; $i++){ ?> 
                 <tr>
-                <!-- <td><?php $x=$i+1; echo $x ?></td> -->
-                <td><?php $x=$i+1; echo "mingu ke-".$x ; ?></td>
-                <td><?php echo "Rp. ".number_format(round($ftend_new[$i],2),2,",",".") ?></td>
+                <td><?php $x=$i+1; echo "minggu ke-".$x ?></td>
+                <td><?php echo $rangeminggu[$i] ; ?></td>
+                <td><?php echo "Rp. ".number_format(round($ftend_new[$week_awal+$i],2),2,",",".") ?></td>
                 
                 </tr>
                   <?php } ?>

@@ -400,20 +400,20 @@
             <table class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90"><?php echo "Peramalan ".$bulan." Bulan Kedepan"?></th>
+                  <th colspan="10" style="text-align: center;" bgcolor="#90EE90"><?php echo "Peramalan ".$jangka_waktu." Minggu Kedepan"?></th>
                 </tr>
                 <tr>
-                <!-- <th>t</th> -->
-                  <th>bulan</th>
-                  <th>peramalan</th>
+                <th>Minggu ke-</th>
+                  <th>Jangka Waktu</th>
+                  <th>Peramalan</th>
                 </tr>
               </thead>
               <tbody>
               
                 <?php for($i = 0; $i <$jangka_waktu; $i++){ ?> 
                 <tr>
-                <!-- <td><?php $x=$i+1; echo $x ?></td> -->
-                <td><?php $x=$i+1; echo "mingu ke-".$x ; ?></td>
+                <td><?php $x=$i+1; echo "Minggu ke-".$x ?></td>
+                <td><?php $x=$i+1; echo $rangeminggu[$i] ; ?></td>
                 <td><?php echo "Rp. ".number_format(round($ftend_new[$i],2),2,",",".") ?></td>
                 
                 </tr>

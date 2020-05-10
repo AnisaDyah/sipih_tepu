@@ -7,7 +7,6 @@
         public function __construct()
         {
             parent ::__construct();
-            $this->load->library('pdf');
             $this->load->model('Setoran_Model');
             
         }
