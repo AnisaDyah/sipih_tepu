@@ -36,17 +36,7 @@ class Peramalan extends CI_Controller {
         $tgl_ramal=date_format(date_create($this->input->post('tgl_ramal')), 'Y-m-d');
         $bulan_ramal=substr($tgl_ramal,5,2);
         $tahun_ramal=substr($tgl_ramal,0,4);
-       
-    //    if(($tahun_ramal-$tahun_akhir) == 0){
-    //         $jangka_waktu=(($bulan_ramal-$bulan_akhir)+1)*4;
-    //         $bulan = ($bulan_ramal-$bulan_akhir)+1;
-    //    }else if(($tahun_ramal-$tahun_akhir) > 0){
-    //         $jangka_waktu=(($bulan_ramal+(12-$bulan_akhir))+1)*4;
-    //         $bulan = ($bulan_ramal+(12-$bulan_akhir))+1;
-    //    }else if(($tahun_ramal-$tahun_akhir)< 0){
-    //     $this->session->set_flashdata('message', 'Invalid Input');
-    //     redirect('peramalan/');
-    //    }
+ 
             $minggu_awal=$this->Peramalan_model->get_minggu($tgl_akhir);
             $minggu_akhir=$this->Peramalan_model->get_minggu($tgl_ramal);
 
@@ -69,17 +59,29 @@ class Peramalan extends CI_Controller {
            }else if(($tahun_ramal-$tahun_akhir) > 0){
                 $jangka_waktu=($week_akhir+(52-$week_awal))+1;
                 for($i=0;$i<$jangka_waktu;$i++){
-                    $x=(52-$week_awal)+1;
+                    $x=(52-$week_awal);
                     if($i <= $x){
                         $week[$i]=($week_awal)+$i;
+                        if(strlen($week[$i])==1){
+                            $text[$i]=(string)$week[$i];
+                            $qwe[$i]="0".$text[$i];
+                        }
+                        else{
+                            $qwe[$i]=$week[$i];
+                        }
                         $year=$tahun_akhir;
-                        $date1[$i] = date( "d F Y", strtotime($year."W".$week[$i]."1") ); // First day of week
-                        $date2[$i] = date( "d F Y", strtotime($year."W".$week[$i]."7") ); // Last day of week
+                        $date1[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."1") ); // First day of week
+                        $date2[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."7") ); // Last day of week
                     }else{
                         //for($j=1;$j<=$i;$j++){
-                        $week1[$i]=$i-($week_akhir-1);
-                        $text[$i]=(string)$week1[$i];
-                        $qwe[$i]="0".$text[$i];
+                        $week1[$i]=$i-$x;
+                        if(strlen($week1[$i])==1){
+                            $text[$i]=(string)$week1[$i];
+                            $qwe[$i]="0".$text[$i];
+                        }
+                        else{
+                            $qwe[$i]=$week1[$i];
+                        }
                         $year=$tahun_ramal;
                         $date1[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."1") ); // First day of week
                         $date2[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."7") ); // Last day of week
@@ -91,18 +93,20 @@ class Peramalan extends CI_Controller {
                 $bulan = $bulan_akhir+(12-$bulan_awal);
            }else if(($tahun_ramal-$tahun_akhir)< 0){
             $this->session->set_flashdata('message', 'Invalid Input');
-            redirect('peramalan/peramalan1');
+            redirect('peramalan/');
            }
         
         
         $bulan_tahun1=substr($tgl_akhir,0,7);
         $harga=array();
         $response_databiasa = array();
-        echo var_dump($week_awal);
+        echo var_dump($tahun);
         
         //mengambil data yang akan diramal
         if(($tahun_akhir-$tahun_awal) >= 0){
-        if($this->Peramalan_model->get_bulantahun1($bulan_tahun1)){
+            if($tgl_ramal >= $tgl_akhir){
+                if($this->Peramalan_model->get_bulantahun1($bulan_tahun1)){
+            
             $data_setor = $this->Peramalan_model->get_bybulan($tgl_awal, $tgl_akhir);
             $harga=array();
             $tgl_setor=array();
@@ -430,10 +434,18 @@ class Peramalan extends CI_Controller {
         //echo var_dump($data_setor);
             helper_log("peramalan", "melakukan peramalan dengan perhitungan");
             $this->load->view('peramalan/ramal2',$data);
-    
+            }
+            else{
+                $this->session->set_flashdata('message', 'data training tidak ditemukan');
+                redirect('peramalan/');
+            }
+        }
+        else{
+            $this->session->set_flashdata('message', 'invalid input');
+            redirect('peramalan/');
         }
     }else{
-            $this->session->set_flashdata('message', 'data training tidak ditemukan');
+            $this->session->set_flashdata('message', 'invalid input');
             redirect('peramalan/');
         }
     }
@@ -480,14 +492,26 @@ class Peramalan extends CI_Controller {
                     $x=(52-$week_awal)+1;
                     if($i <= $x){
                         $week[$i]=($week_awal)+$i;
+                        if(strlen($week[$i])==1){
+                            $text[$i]=(string)$week[$i];
+                            $qwe[$i]="0".$text[$i];
+                        }
+                        else{
+                            $qwe[$i]=$week[$i];
+                        }
                         $year=$tahun_awal;
                         $date1[$i] = date( "d F Y", strtotime($year."W".$week[$i]."1") ); // First day of week
                         $date2[$i] = date( "d F Y", strtotime($year."W".$week[$i]."7") ); // Last day of week
                     }else{
                         //for($j=1;$j<=$i;$j++){
-                        $week1[$i]=$i-($week_akhir-1);
-                        $text[$i]=(string)$week1[$i];
-                        $qwe[$i]="0".$text[$i];
+                        $week1[$i]=$i-$x;
+                        if(strlen($week1[$i])==1){
+                            $text[$i]=(string)$week1[$i];
+                            $qwe[$i]="0".$text[$i];
+                        }
+                        else{
+                            $qwe[$i]=$week1[$i];
+                        }
                         $year=$tahun_akhir;
                         $date1[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."1") ); // First day of week
                         $date2[$i] = date( "d F Y", strtotime($year."W".$qwe[$i]."7") ); // Last day of week
@@ -503,7 +527,7 @@ class Peramalan extends CI_Controller {
            }
 
          
-           echo var_dump($week_awal);
+           echo var_dump($week1[5]);
             
             $response_databiasa2 = array();
 

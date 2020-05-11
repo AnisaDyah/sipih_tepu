@@ -33,8 +33,7 @@ if($this->session->status !== ('Logged'))
     <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') ?>">
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url('assets/build/css/custom.min.css')?>" rel="stylesheet">
-    <link rel="shortcut icon" href="<?php echo base_url() ?>assets/img/logos2.png">
-
+   
   </head>
 
   <body class="nav-md">
@@ -70,7 +69,7 @@ if($this->session->status !== ('Logged'))
                 <ul class="nav side-menu">
                   <li><a href="<?php echo base_url('Login/admin_index') ?>"><i class="fa fa-home"></i> Home </a></li>
                   <?php if($this->session->userdata('id_user_level') == '1'): ?>
-                  <li><a><i class="fa fa-edit"></i> User <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                    
                       <li><a href="<?php echo base_url('Pengguna/create')?>">Tambah User</a></li>
@@ -103,12 +102,12 @@ if($this->session->status !== ('Logged'))
                   <?php if($this->session->userdata('id_user_level') == '1'): ?>
                   <li>
                     <a href="<?php echo base_url('Peramalan/')?>">
-                    <i class="fa fa-search"></i>Perhitungan Metode</a>
+                    <i class="fa fa-calculator"></i>Perhitungan Metode</a>
                   </li>
                   <?php endif; ?>
                   <li>
                     <a href="<?php echo base_url('Peramalan/peramalan1')?>">
-                    <i class="fa fa-search"></i>Proyeksi Harga</a>
+                    <i class="fa fa-money"></i>Proyeksi Harga</a>
                   </li>
                 </ul>
               </div>
