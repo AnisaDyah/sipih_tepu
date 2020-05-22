@@ -12,7 +12,10 @@ class M_grafik extends CI_Model{
         }
     }
     function get_data_stok_bytahun(){
-        $query = $this->db->query("SELECT id_user, SUM(IF(YEAR(tgl_setoran)='2018',jml_setoran,0)) AS jml_setoran1, SUM(IF(YEAR(tgl_setoran)='2019',jml_setoran,0)) AS jml_setoran2 FROM setoran_telur GROUP BY id_user");
+        $query = $this->db->query("SELECT id_user, SUM(IF(YEAR(tgl_setoran)='2018',jml_setoran,0)) AS jml_setoran1, 
+        SUM(IF(YEAR(tgl_setoran)='2019',jml_setoran,0)) AS jml_setoran2, 
+        SUM(IF(YEAR(tgl_setoran)='2020',jml_setoran,0)) AS jml_setoran3 
+        FROM setoran_telur GROUP BY id_user");
           
         if($query->num_rows() > 0){
             foreach($query->result() as $data){

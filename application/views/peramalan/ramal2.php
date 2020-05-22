@@ -31,7 +31,7 @@
                   <th colspan="5" style="text-align: center;" bgcolor="#90EE90">Data yang Dijadikan Acuan Peramalan</th>
                 </tr>
                 <tr>
-                  <th>Bulan</th>
+                  <th>Tanggal</th>
                   <th>Data</th>
                 
                 </tr>
@@ -40,7 +40,7 @@
               <?php //for($i = 0; $i < count($year_month); $i++){ ?>
                 <?php foreach($data_setor as $row){ ?>
                 <tr>
-                  <td><?php echo $row->tgl_setoran ?></td>
+                  <td><?php echo "'".date_format(date_create($row->tgl_setoran), "d F Y"); ?></td>
                   <td><?php echo "Rp. ".number_format("$row->harga",2,",",".") ?></td>
            
                 </tr>

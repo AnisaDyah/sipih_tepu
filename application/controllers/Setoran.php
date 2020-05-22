@@ -182,6 +182,7 @@ class Setoran extends CI_Controller {
         
             $jml_setor[]=$key->jml_setoran1;
             $jml_setor2[]=$key->jml_setoran2;
+            $jml_setor3[]=$key->jml_setoran3;
             
             foreach($user as $var){
                 if($key->id_user == $var->id_user){
@@ -194,6 +195,7 @@ class Setoran extends CI_Controller {
             array_push($setoran_chart, array(
                 "jml_setor"=>round($jml_setor[$i],2),
                 "jml_setor2"=>round($jml_setor2[$i],2),
+                "jml_setor3"=>round($jml_setor3[$i],2),
                 "nama_peternak"=>$nama_peternak[$i],
                 "id_user"=>$id_user[$i],
 				)
