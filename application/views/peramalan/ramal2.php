@@ -373,14 +373,14 @@
                 <?php for($i = 0; $i <count($data_setor); $i++){ ?> 
                 <tr>
                 <td><?php echo $i+1 ?></td>
-                <td><?php echo abs(round($mape[$i],2))."%" ; ?></td>
+                <td><?php echo round($mape[$i],2)."%" ; ?></td>
                 <td><?php echo round($mse[$i],2) ?></td>
                 
                 </tr>
                   <?php } ?>
                   <tr>
                   <td>Total : </td>
-                  <td><?php echo round($total_mape/count($data_setor),2) ?> </td>
+                  <td><?php echo round($total_mape/count($data_setor),2)."%" ?> </td>
                   <td><?php echo round($total_mse/count($data_setor),2) ?> </td>
                   </tr>
               </tbody>

@@ -100,7 +100,7 @@ class Peramalan extends CI_Controller {
         $bulan_tahun1=substr($tgl_akhir,0,7);
         $harga=array();
         $response_databiasa = array();
-        echo var_dump($tahun);
+        
         
         //mengambil data yang akan diramal
         if(($tahun_akhir-$tahun_awal) >= 0){
@@ -323,8 +323,9 @@ class Peramalan extends CI_Controller {
                 $mape[$i]=0;
                 $mse[$i]=0;
             }else{
-            $mape[$i]=(($harga[$i]-$Ftend[$i])/$harga[$i])*100;
+            $mape[$i]=abs(($harga[$i]-$Ftend[$i])/$harga[$i])*100;
             $mse[$i]=($harga[$i]-$Ftend[$i])*($harga[$i]-$Ftend[$i]);
+            //$ex[$i]=(($harga[$i]-$Ftend[$i])/$harga[$i]);
             }
             $total_mape=$total_mape+$mape[$i];
             $total_mse=$total_mse+$mse[$i];
@@ -332,10 +333,10 @@ class Peramalan extends CI_Controller {
         
             $data['mape']=$mape;
             $data['mse']=$mse;
-            $data['total_mape']=abs($total_mape);
+            $data['total_mape']=$total_mape;
             $data['total_mse']=$total_mse;
             
-           
+            echo var_dump($total_mape);
             //peramalan 2 bulan kedepan
             for($i = 0 ; $i <$jangka_waktu ; $i++){
                 for($j=0 ; $j<$jangka_waktu; $j++){
@@ -527,7 +528,7 @@ class Peramalan extends CI_Controller {
            }
 
          
-           echo var_dump($week1[5]);
+           
             
             $response_databiasa2 = array();
 
@@ -545,7 +546,7 @@ class Peramalan extends CI_Controller {
           $minggu_last_data=$this->Peramalan_model->get_minggu($tgl_last_data);
           $week_last_data = $minggu_last_data['mingguke'];
           $tahun_last_data=substr($tgl_last_data,0,4);
-
+          
           //mencari nilai jangka waktu peramalan
           if(($tahun_akhir-$tahun_last_data) == 0){
                     $jangka_waktu=($week_akhir-$week_last_data)+1;
@@ -568,7 +569,7 @@ class Peramalan extends CI_Controller {
             $data['tgl_setor']=$tgl_setor;
             $data['dmax']=$dmax;
             $data['dmin']=$dmin;
-
+            
         //mencari nilai d1 dan d2
             $x=substr($dmin,2,3);
             $y=substr($dmax,2,3);
@@ -642,7 +643,7 @@ class Peramalan extends CI_Controller {
             
             $data['Fz']=$Fz;
             $data['harga']=$harga;
-
+            
             //FLR dan FLRG
             
             $state1=array();
@@ -835,22 +836,24 @@ class Peramalan extends CI_Controller {
                 
                
             }
+            $out=($jangka_waktu-$jangka_ramal);
             for($i = 0; $i <$jangka_ramal; $i++){
                 $bulan_setor[$i]="minggu ke-".($i+1);
                 array_push($response_databiasa2, array(
                     "bulan"=>$bulan_setor[$i],
-                    "data_peramalan"=>round($ftend_new[$week_awal+$i],2),
+                    "data_peramalan"=>round($ftend_new[$out+$i],2),
                     )
                 );
             }
             
             
+            //echo var_dump($ftend_new);
                 $data['response_databiasa2']=json_encode($response_databiasa2);
                 $data['jangka_waktu']=$jangka_waktu;
                 $data['ftend_new']=$ftend_new;
                 $data['bulan']=$bulan;
                 $data['rangeminggu']=$rangeminggu;
-                $data['week_awal']=$week_awal;
+                $data['out']=$out;
                 $data['jangka_ramal']=$jangka_ramal;
                 //echo var_dump($response_databiasa);
                 helper_log("peramalan", "melakukan peramalan tanpa perhitungan");

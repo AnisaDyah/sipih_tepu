@@ -37,7 +37,7 @@
                 <tr>
                 <td><?php $x=$i+1; echo "minggu ke-".$x ?></td>
                 <td><?php echo $rangeminggu[$i] ; ?></td>
-                <td><?php echo "Rp. ".number_format(round($ftend_new[$week_awal+$i],2),2,",",".") ?></td>
+                <td><?php echo "Rp. ".number_format(round($ftend_new[$out+$i],2),2,",",".") ?></td>
                 
                 </tr>
                   <?php } ?>
